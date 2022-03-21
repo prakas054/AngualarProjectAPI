@@ -1,0 +1,96 @@
+<app-header></app-header> 
+<app-physician-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-physician-navbar>  
+   
+
+  
+            <div class="content-wrapper">
+            
+              <section class="content-header">      
+              </section>
+              <section class="content">
+                  <div class="container-fluid">
+                    <div class="row">         
+                      <div class="col-md-12">            
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <h3 class="card-title">Patient List</h3>
+                          </div>    
+                          <div class="example-header">
+                          
+                            <button type="button" class="btn btn-primary float-right" (click)="btn_add()">Register Patient</button>
+                          </div>   
+
+                          <div class="example-header">
+                            <div class="row">
+                              <div class="col-md-1">
+                                Filter By                            
+                              </div>
+                              <div class="col-md-3">                           
+                                <select [(ngModel)]="strFilterkey" class="form-control">
+                                  <option>patientId</option>
+                                  <option>name</option>
+                                </select>
+                              </div>
+      
+                              <div class="col-md-3">
+                                <input type="text" class="form-control" [(ngModel)]="strFiltervalue"/>
+                              </div>
+      
+                                                     
+                              <div class="col-md-3 col-sm-3">
+                                <button class="btn btn-primary" (click)="search()">Search</button>
+                                &nbsp;<button class="btn btn-default" (click)="reset()">Reset</button>
+                              </div>
+                            </div>
+                          </div>
+                         
+        
+                          <div class="example-container mat-elevation-z8">
+        
+                            <table mat-table [dataSource]="dataSource" matSort>                  
+                             
+                              <ng-container matColumnDef="Id">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Id </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.employeeId}} </mat-cell>                        
+                              </ng-container>
+                          
+                            
+                              <ng-container matColumnDef="Name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                              </ng-container>
+                          
+                             
+                              <ng-container matColumnDef="Email">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.emailId}} </mat-cell>
+                              </ng-container>
+                          
+    
+                              <ng-container matColumnDef="DOJ">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Joining </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.createdOn | date: "yyyy-MM-dd"}} </mat-cell>
+                              </ng-container> 
+        
+                              <ng-container matColumnDef="DOB">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> DOB </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.dob | date: "yyyy-MM-dd"}} </mat-cell>
+                              </ng-container>
+        
+                              
+                          
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </table>
+                          
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        
+                            
+                          </div>
+                        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </section>
+            </div>

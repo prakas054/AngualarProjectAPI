@@ -1,0 +1,94 @@
+
+<style>
+    .error {
+   color: red;
+}
+</style>
+
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>
+
+  
+  <div class="content-wrapper">
+    
+    <section class="content-header">      
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">         
+            <div class="col-md-12">            
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Allergy Master Form</h3>
+                </div>               
+              
+                <form [formGroup]="form" id="allergyform" (submit)="frn_allergy_click()">
+                 
+                    <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="allergyCode">Allergy Code *</label>
+                                <input formControlName="allergyCode" type="text" class="form-control" placeholder="Allergy Code">
+                                <span id="#allergycode-error-msg" *ngIf="form.controls['allergyCode'].invalid && form.controls['allergyCode'].dirty && form.hasError('required','allergyCode')" class="error">Please enter Allergy Code</span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="allergyType">Allergy Type *</label>
+                                <input formControlName="allergyType" type="text" class="form-control" placeholder="Allergy Type">
+                                <span *ngIf="form.controls['allergyType'].invalid && form.controls['allergyType'].dirty && form.hasError('required','allergyType')" class="error">Please enter Allergy Type</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="allergyDesc">Allergy Description </label>
+                                <input formControlName="allergyDesc" type="text" class="form-control" placeholder="Allergy Description">                                
+                            </div>
+
+                            <div class="form-group">
+                              <label for="allergyDesc">Allerginicity </label>
+                              <input formControlName="allerginicity" type="text" class="form-control" placeholder="Allerginicity">                                
+                          </div>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="allergyName">Allergy Name  *</label>
+                                <input type="text" formControlName="allergyName" class="form-control" placeholder="Allergy Name">
+                                <span *ngIf="form.controls['allergyName'].invalid && form.controls['allergyName'].dirty && form.hasError('required','allergyName')" class="error">Please enter a Allergy Name</span>
+                            </div> 
+                            
+                            <div class="form-group">
+                                <label for="allergyClinicalInfo">Allergy Clinical Info *</label>
+                                <input type="text" formControlName="allergyClinicalInfo" class="form-control" placeholder="Allergy Clinical Info">
+                                <span *ngIf="form.controls['allergyClinicalInfo'].invalid && form.controls['allergyClinicalInfo'].dirty && form.hasError('required','allergyClinicalInfo')" class="error">Please enter a Allergy Clinical Info</span>
+                            </div> 
+
+                            <div class="form-group">
+                                <label for="allergySource">Allergy Source </label>
+                                <input type="text" formControlName="allergySource" class="form-control" placeholder="Allergy Source">
+                                
+                            </div> 
+                        </div>                        
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="col-md-12 bg-light text-right">
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+                    <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+    </section>
+  </div>
+
+  
+  
+   

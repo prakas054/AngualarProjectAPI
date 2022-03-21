@@ -1,0 +1,557 @@
+<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h3 class="card-title"><b>Demographics</b></h3>
+            </div>
+            <form (ngSubmit)="submitForm()" (submit)="frn_patientdetails_click()">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- <p class="card-title"><b>Demographics</b></p><br> -->
+                    <!-- <hr> -->
+                    <!-- <div [formGroup]="patientdetail">
+                      <label>Title:<span style="color: red;">*</span></label>
+                      Mr.<input type="radio" name="title" value="Mr." formControlName="title"><span>
+                      </span>
+                      Ms.<input type="radio" name="title" value="Ms." formControlName="title"><span>
+                      </span>
+                      Mrs.<input type="radio" name="title" value="Mrs." formControlName="title"><span>
+                      </span>
+                      Dr.<input type="radio" name="title" value="Dr." formControlName="title"><span>
+                      </span>
+                      <span style="color: red;"
+                        *ngIf="isFormSubmitted && patientdetail.controls['title'].errors?.['required']">
+                        Kindly select the title.
+                      </span>
+                    </div> -->
+
+                    <div class="form-group clearfix" [formGroup]="patientdetail">
+                      <label>Title:<span style="color: red;">*</span></label>&nbsp;
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary1" name="title" value="Mr." formControlName="title" >
+                        <label for="radioPrimary1">Mr.
+                        </label>&nbsp;
+                      </div>
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary2" name="title" value="Ms." formControlName="title">
+                        <label for="radioPrimary2">Ms.
+                        </label>&nbsp;
+                      </div>
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary3" name="title" value="Mrs." formControlName="title">
+                        <label for="radioPrimary3">Mrs.
+                        </label>&nbsp;
+                      </div>
+                      <div class="icheck-primary d-inline">
+                        <input type="radio" id="radioPrimary4" name="title" value="Dr." formControlName="title">
+                        <label for="radioPrimary4">Dr.
+                        </label>&nbsp;
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="isFormSubmitted && patientdetail.controls['title'].errors?.['required']">
+                        Kindly select the title.
+                      </span>
+                    </div>
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <input type="text" placeholder="First Name" class="form-control" formControlName="fname" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>&nbsp;
+                      <input type="text" placeholder="Last Name" class="form-control" formControlName="lname" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['fname'].invalid">
+                      First name cannot be empty.<br /></span>
+                    <span style="color: red;margin-right: 50%;"
+                      *ngIf="patientdetail.controls['fname'].dirty && patientdetail.controls['fname'].errors">
+                      Please don’t use abbreviations in first name field<br /></span>
+
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['lname'].invalid">
+                      Last name cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['lname'].dirty && patientdetail.controls['lname'].errors">
+                      Please don’t use abbreviations in last name field</span>
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <input type="text" placeholder="Date Of Birth" class="form-control" onfocus="(this.type='date')"
+                        id="dob" [(ngModel)]="patientdetail.value.dob" (mouseleave)="ageCalculator();"
+                        formControlName="dob" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-calendar"></span>
+                        </div>
+                      </div>&nbsp;
+                      <input type="number" placeholder="Age" class="form-control" id="age" value="{{age}}" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['dob'].invalid">
+                      Please enter a date.</span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['dob'].dirty && patientdetail.controls['dob'].errors">
+                      Please enter a valid date of birth</span>
+
+                    <!-- <div [formGroup]="patientdetail">
+                      <label>Gender:<span style="color: red;">*</span></label>
+                      Male<input type="radio" name="gender" value="Male" formControlName="gender"><span> </span>
+                      Female<input type="radio" name="gender" value="Female" formControlName="gender"><span> </span>
+                      Others<input type="radio" name="gender" value="Others" formControlName="gender"><span> </span>
+                      <span style="color: red;"
+                        *ngIf="isFormSubmitted && patientdetail.controls['gender'].errors?.['required']">
+                        Gender is a required field
+                      </span>
+                    </div> -->
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <select class="form-control" name="gender" formControlName="gender">
+                        <option name="gender" value="">Gender</option>
+                        <option name="gender" value="Male">Male</option>
+                        <option name="gender" value="Female">Female</option>
+                        <option name="gender" value="Others">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>&nbsp;
+                      <input type="text" placeholder="Race" class="form-control" formControlName="race" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>&nbsp;
+                    </div>
+                    <span style="color: red;"
+                      *ngIf="isFormSubmitted && patientdetail.controls['gender'].errors?.['required']">
+                      Gender is a required field<br />
+                    </span>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['race'].invalid">
+                      Race field cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['race'].dirty && patientdetail.controls['race'].errors">
+                      Please don’t use abbreviations in Race field<br /></span>
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <!-- <input type="text" placeholder="Race" class="form-control" formControlName="race" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
+                      </div>&nbsp; -->
+                      <input type="text" placeholder="Ethnicity " class="form-control" formControlName="ethnicity" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user-tie"></span>
+                        </div>
+                      </div>&nbsp;
+                      <input type="text" placeholder="Languages Known" class="form-control"
+                        formControlName="language" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-language"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['ethnicity'].invalid">
+                      Ethnicity field cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['ethnicity'].dirty && patientdetail.controls['ethnicity'].errors">
+                      Please don’t use abbreviations in Ethnicity field<br /></span>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['language'].invalid">
+                      Languages Known cannot be empty.</span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['language'].dirty && patientdetail.controls['language'].errors">
+                      Please don’t use abbreviations Language field</span>
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <input type="email" placeholder="Email" class="form-control" formControlName="email" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-envelope"></span>
+                        </div>
+                      </div> &nbsp;
+                      <input type="tel" placeholder="Contact Number" class="form-control" formControlName="phone" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-phone"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['email'].invalid">
+                      Email field cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf="patientdetail.controls['email'].invalid && patientdetail.controls['email'].touched">
+                      Please enter your email address e.g. exampleusername@xyzdomain.com<br /></span>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['phone'].invalid">
+                      Contact Number field cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf=" patientdetail.controls['phone'].invalid && patientdetail.controls['phone'].touched">
+                      Please enter contact number in correct format <br /></span>
+
+
+                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                      <textarea placeholder="Home Address" class="form-control" formControlName="address"
+                        [(ngModel)]="patientdetail.value.address"></textarea>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-address-book"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientdetail.controls['address'].invalid">
+                      Postal address cannot be empty.<br /></span>
+                    <span style="color: red;"
+                      *ngIf=" patientdetail.controls['address'].invalid && patientdetail.controls['address'].touched">
+                      Please provide the postal address.</span>
+
+
+                    <div class="content">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="card card-outline card-primary">
+                              <div class="card-header">
+                                <h3 class="card-title"><b>Emergency Contact Info</b></h3>
+                              </div>
+                              <!-- <hr>
+                    <h2 class="card-title"><b>Emergency Contact Info</b></h2><br>
+                    <hr> -->
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <!-- <div [formGroup]="patientdetail">
+                                      <label>Title:<span style="color: red;">*</span></label>
+                                      Mr.<input type="radio" name="etitle" value="Mr." formControlName="etitle"><span>
+                                      </span>
+                                      Ms.<input type="radio" name="etitle" value="Ms." formControlName="etitle"><span>
+                                      </span>
+                                      Mrs.<input type="radio" name="etitle" value="Mrs." formControlName="etitle"><span>
+                                      </span>
+                                      Dr.<input type="radio" name="etitle" value="Dr." formControlName="etitle"><span>
+                                      </span>
+                                      <span style="color: red;"
+                                        *ngIf="isFormSubmitted && patientdetail.controls['etitle'].errors?.['required']">
+                                        Kindly select the title.
+                                      </span>
+                                    </div> -->
+
+                                    <div class="form-group clearfix" [formGroup]="patientdetail">
+                                      <label>Title:<span style="color: red;">*</span></label>&nbsp;
+                                      <div class="icheck-primary d-inline">
+                                        <input type="radio" id="radioPrimary5" name="etitle" value="Mr." formControlName="etitle" >
+                                        <label for="radioPrimary5">Mr.
+                                        </label>&nbsp;
+                                      </div>
+                                      <div class="icheck-primary d-inline">
+                                        <input type="radio" id="radioPrimary6" name="etitle" value="Ms." formControlName="etitle">
+                                        <label for="radioPrimary6">Ms.
+                                        </label>&nbsp;
+                                      </div>
+                                      <div class="icheck-primary d-inline">
+                                        <input type="radio" id="radioPrimary7" name="etitle" value="Mrs." formControlName="etitle">
+                                        <label for="radioPrimary7">Mrs.
+                                        </label>&nbsp;
+                                      </div>
+                                      <div class="icheck-primary d-inline">
+                                        <input type="radio" id="radioPrimary8" name="etitle" value="Dr." formControlName="etitle">
+                                        <label for="radioPrimary8">Dr.
+                                        </label>&nbsp;
+                                      </div>
+                                      <span style="color: red;"
+                                        *ngIf="isFormSubmitted && patientdetail.controls['etitle'].errors?.['required']">
+                                        Kindly select the title.
+                                      </span>
+                                    </div>
+
+                                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                                      <input type="text" placeholder="First Name" class="form-control"
+                                        formControlName="efname" />
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-user"></span>
+                                        </div>
+                                      </div>&nbsp;
+                                      <input type="text" placeholder="Last Name" class="form-control"
+                                        formControlName="elname" />
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-user"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['efname'].invalid">
+                                      First name cannot be empty.<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf="patientdetail.controls['efname'].dirty && patientdetail.controls['efname'].errors">
+                                      Please don’t use abbreviations<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['elname'].invalid">
+                                      Last name cannot be empty.<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf="patientdetail.controls['elname'].dirty && patientdetail.controls['elname'].errors">
+                                      Please don’t use abbreviations</span>
+
+
+                                    <!-- <div [formGroup]="patientdetail">
+                                      <label>Relationship:<span style="color: red;">*</span></label>
+                                      Father<input type="radio" name="erelation" value="Father"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      Mother<input type="radio" name="erelation" value="Mother"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      Sibbling<input type="radio" name="erelation" value="Sibbling"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      Spouse<input type="radio" name="erelation" value="Spouse"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      Friend<input type="radio" name="erelation" value="Friend"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      Others<input type="radio" name="erelation" value="Others"
+                                        formControlName="erelation"><span>
+                                      </span>
+                                      <span style="color: red;"
+                                        *ngIf="isFormSubmitted && patientdetail.controls['erelation'].errors?.['required']">
+                                        Relationship is a required field.
+                                      </span>
+                                    </div> -->
+
+                                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                                      <select class="form-control" name="erelation" formControlName="erelation">
+                                        <option name="erelation" value="">Relationship</option>
+                                        <option name="erelation" value="Father">Father</option>
+                                        <option name="erelation" value="Mother">Mother</option>
+                                        <option name="erelation" value="Sibling">Sibling</option>
+                                        <option name="erelation" value="Spouse">Spouse</option>
+                                        <option name="erelation" value="Friend">Friend</option>
+                                        <option name="erelation" value="Others">Others</option>
+                                      </select>
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-user"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['erelation'].errors?.['required']">
+                                      Relationship is a required field.
+                                    </span>
+
+                                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                                      <input type="email" placeholder="Email" class="form-control"
+                                        formControlName="eEmail" />
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-envelope"></span>
+                                        </div>
+                                      </div>&nbsp;
+                                      <input type="tel" placeholder="Contact Number" class="form-control"
+                                        formControlName="ephone" />
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-phone"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['eEmail'].invalid">
+                                      Email field cannot be empty.<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf="patientdetail.controls['eEmail'].invalid && patientdetail.controls['eEmail'].touched">
+                                      Please enter your email address e.g. exampleusername@xyzdomain.com<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['ephone'].invalid">
+                                      Contact Number field cannot be empty.<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf=" patientdetail.controls['phone'].invalid && patientdetail.controls['ephone'].touched">
+                                      Please enter contact number in correct format <br /></span>
+
+                                    <!-- <div>
+                                      <label>Address same as Patient: </label><input type="checkbox" name="add"
+                                        [checked]="false" (change)="emergencyAddress($event)"><span> </span>
+                                    </div> -->
+
+                                    <div class="icheck-primary d-inline">
+                                      <input type="checkbox" id="checkboxPrimary3" name="add"
+                                      [checked]="false" (change)="emergencyAddress($event)" >
+                                      <label for="checkboxPrimary3">
+                                        Address same as Patient
+                                      </label>
+                                    </div>
+
+                                    <div class="input-group mb-3" [formGroup]="patientdetail">
+                                      <textarea placeholder="Home Address" class="form-control"
+                                        formControlName="eaddress"
+                                        [(ngModel)]="patientdetail.value.eaddress"></textarea>
+                                      <div class="input-group-append">
+                                        <div class="input-group-text">
+                                          <span class="fas fa-address-book"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientdetail.controls['eaddress'].invalid">
+                                      Postal address cannot be empty.<br /></span>
+                                    <span style="color: red;"
+                                      *ngIf=" patientdetail.controls['eaddress'].invalid && patientdetail.controls['eaddress'].touched">
+                                      Please provide the postal address.<br /></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <div>
+                      <label>Do you need access to patient portal?</label><input type="checkbox" name="access" 
+                        value="yes" [(ngModel)]="access_to_patientPortal"><span>
+                      </span>
+                    </div>
+                    <div [formGroup]="patientdetail">
+                      <label>Allergy Details: Patient has any known allergies? </label>
+                      Yes<input type="radio" [value]="1" [(ngModel)]="isVisible" name="isVisible"
+                        formControlName="isVisible" [checked]="isSelected"><span>
+                      </span>
+                      No<input type="radio" [value]="0" [(ngModel)]="isVisible" name="isVisible"
+                        formControlName="isVisible"  [checked]="!isSelected"><span>
+                      </span>
+                      <span style="color: red;"
+                        *ngIf="isFormSubmitted && patientdetail.controls['isVisible'].errors?.['required']">
+                        Allergy is a required field.
+                      </span>
+                    </div>
+
+                    <div class="showDiv" *ngIf="isVisible == 1">
+                      <div class="card card-outline card-primary">
+                        <div class="card-header">
+                          <h2 class="card-title"><b>Allergy Details</b></h2>
+                        </div>
+                        <div class="card-body" [formGroup]="allergy">
+
+                          <div class="input-group mb-3">
+                            <input type="tel" placeholder="Allergy ID" class="form-control" formControlName="allergy_Id"
+                              onfocus="(placeholder='Enter WHO/IUIS Allergen Nomenclature ID, if known')" />
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-allergies"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="input-group mb-3">
+
+                            <select class="form-control"
+                            [(ngModel)]="allergy.value.allergyType" name="allergyType" formControlName="allergyType"
+                            >
+                              <option>Allergy Type</option>
+                              <option [value]=" 'food' ">Food</option>
+                              <option [value]=" 'insect' ">Insect</option>
+                              <option [value]=" 'fungi' ">Fungi</option>
+                              <option [value]=" 'bacteria' ">Bacteria</option>
+                              <option [value]=" 'others' ">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>&nbsp;
+                            <select class="form-control" formControlName="allergyName">
+                              <option>Allergy Name</option>
+                              <option>Allergy1</option>
+                              <option>Allergy2</option>
+                              <option>Allergy3</option>
+                              <option>Allergy4</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="showDiv" *ngIf="allergy.value.allergyType == 'others' " [formGroup]="allergy">
+                            <div class="input-group mb-3">
+                              <input type="text" placeholder="Allergy Type Details" class="form-control"
+                                formControlName="allergytypedetail">
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <span style="color: red;"
+                              *ngIf="allergy.controls['allergytypedetail'].errors?.['required'] && allergy.controls['allergytypedetail'].touched">
+                              Allergy type details is a required field.<br />
+                            </span>
+                            <span style="color: red;"
+                              *ngIf="allergy.controls['allergytypedetail'].dirty && allergy.controls['allergytypedetail'].errors">
+                              Please don’t use abbreviations<br/></span>
+                          </div>
+
+
+                          <div class="input-group mb-3">
+                              <textarea  placeholder="Allergy Description" class="form-control" formControlName="description"></textarea>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>&nbsp;
+                            <textarea placeholder="Allergy Clinical Information" class="form-control" formControlName="clinical_Information"></textarea>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-book-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <label>Is Allergy Fatal?</label>
+                            Yes<input type="radio" value="yes" name="is_allergy_fatal" formControlName="is_allergy_fatal" required><span>
+                            </span>
+                            No<input type="radio" value="no" name="is_allergy_fatal" formControlName="is_allergy_fatal" required><span>
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="card-footer">
+                      <button type="button" class="btn btn-default mr-2 float-right"
+                        (click)="btnCancel_click()">Cancel</button>
+                      <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                      <span *ngIf="!patientdetail.valid" style="color: red;">{{ message}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

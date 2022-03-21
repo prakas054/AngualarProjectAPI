@@ -1,0 +1,67 @@
+  
+<app-header>
+  <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+</app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" style="margin-top: 5%;">
+
+        <div class="card card-outline card-primary">
+          <div class="card-header">
+            <h2 class="card-title"><b>Diagnosis</b></h2>
+          </div>
+          <div class="card-body" (ngSubmit)="submitForm()" [formGroup]="diagnosis">
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" name="Diagnosis_Code" placeholder="Diagnosis Code"
+                formControlName="Diagnosis_Code"  (change)="filterDiagnosiscode($event)" value="{{diagnosisCode}}" />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-diagnoses"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <select class="form-control select2" name="Diagnosis_Description" formControlName="Diagnosis_Description"
+                (change)="filterDiagnosisdescription($event)">
+                <option name="Diagnosis_Description" value="" disabled>Diagnosis Description</option>
+                <option name="Diagnosis_Description" value="{{item.diagnosis_Description}}"
+                  *ngFor="let item of diagnosisArray">{{item.diagnosis_Description}}</option>
+              </select>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-notes-medical"></span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="input-group mb-3">
+              <textarea type="text" placeholder="Notes" class="form-control"></textarea>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-notes-medical"></span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card-footer">
+              <button type="button" class="btn btn-default mr-2 float-left" (click)="btnCancel_click()">Cancel</button>
+              <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+              <button type="button" class="btn btn-default mr-2 float-right"
+                [routerLink]="['/patientprocedure']">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</div>

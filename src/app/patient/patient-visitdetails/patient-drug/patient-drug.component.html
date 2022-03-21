@@ -1,0 +1,180 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="margin-top: 5%;">
+
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h2 class="card-title"><b>Medication</b></h2>
+                    </div>
+                    <div class="card-body" (ngSubmit)="submitForm()" [formGroup]="drug">
+
+                        <div class="input-group mb-3">
+                            <select class="form-control">
+                              <option value="">Drug ID</option>
+                              <option [value]="'id1'">Drug1</option>
+                              <option [value]="'id2'">Drug2</option>
+                              <option [value]="'id3'">Drug3</option>
+                              <option [value]="'id4'">Drug4</option>
+                              <option [value]="'others'">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-pills"></span>
+                              </div>
+                            </div> 
+                          </div>
+                         
+                          <!-- <div class="showDiv" *ngIf="drugid == 'others' " [formGroup]="patientdetails">
+                            <div class="input-group mb-3">
+                              <input type="text" placeholder="Medication ID details" class="form-control"
+                                formControlName="drugdetails">
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <span style="color: red;"
+                              *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                              Please provide Patient’s Medication details.<br />
+                            </span>
+                          </div>
+       -->
+      
+                          <div class="input-group mb-3">
+                            <select class="form-control">
+                              <option value="">Drug Name</option>
+                              <option [value]="'n1'">Drug1</option>
+                              <option [value]="'n2'">Drug2</option>
+                              <option [value]="'n3'">Drug3</option>
+                              <option [value]="'n4'">Drug4</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <select class="form-control" name="druggenericname">
+                              <option value="">Drug Generic Name</option>
+                              <option [value]="'g1'">Drug1</option>
+                              <option [value]="'g2'">Drug2</option>
+                              <option [value]="'g3'">Drug3</option>
+                              <option [value]="'g4'">Drug4</option>
+                              <option [value]="'others'">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="input-group mb-3">
+                            <select class="form-control" name="drugbrandname">
+                              <option value="">Drug Brand Name</option>
+                              <option [value]="'b1'">Drug1</option>
+                              <option [value]="'b2'">Drug2</option>
+                              <option [value]="'b3'">Drug3</option>
+                              <option [value]="'b4'">Drug4</option>
+                              <option [value]="'others'">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="showDiv" *ngIf="druggenericname == 'others' " [formGroup]="patientdetails">
+                            <div class="input-group mb-3">
+                              <input type="text" placeholder="Medication Generic Name details" class="form-control"
+                                formControlName="drugdetails">
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <span style="color: red;"
+                              *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                              Please provide Patient’s Medication details.<br />
+                            </span>
+                          </div> -->
+
+                          <!-- <div class="showDiv" *ngIf="drugbrandname == 'others' " [formGroup]="patientdetails">
+                            <div class="input-group mb-3">
+                              <input type="text" placeholder="Medication Brand Name details" class="form-control"
+                                formControlName="drugdetails">
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <span style="color: red;"
+                              *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                              Please provide Patient’s Medication details.<br />
+                            </span>
+                          </div> -->
+      
+                          <div class="input-group mb-3">
+                            <select class="form-control" name="drugform">
+                              <option value="">Drug Form</option>
+                              <option [value]="'f1'">Drug1</option>
+                              <option [value]="'f2'">Drug2</option>
+                              <option [value]="'f3'">Drug3</option>
+                              <option [value]="'f4'">Drug4</option>
+                              <option [value]="'others'">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-angle-down"></span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <textarea type="text" placeholder="Notes" class="form-control"
+                              ></textarea>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="showDiv" *ngIf="drugform == 'others' " [formGroup]="patientdetails">
+                            <div class="input-group mb-3">
+                              <input type="text" placeholder="Medication Form details" class="form-control"
+                                formControlName="drugdetails">
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <span style="color: red;"
+                              *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                              Please provide Patient’s Medication details.<br />
+                            </span>
+                          </div> -->
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default mr-2 float-left"
+                                (click)="btnCancel_click()">Cancel</button>
+                            <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                            <button type="button" class="btn btn-default mr-2 float-right" [routerLink]="['/patientprocedure']">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+

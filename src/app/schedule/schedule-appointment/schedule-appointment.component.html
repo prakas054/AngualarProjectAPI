@@ -1,0 +1,137 @@
+<app-header></app-header>
+<app-physiciandash></app-physiciandash>
+<div class="content-wrapper">
+  <div class="container">
+    <div class="row mx-0 mt-4">
+      <div class="col">
+        <div class="card col-md-12 mt-2">
+          <div class="text-center">
+            <h2>Schedule Appoinment</h2>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="submitForm()" (submit)="appointmentForm_click()">
+            <div>
+              <div class="mb-3">
+                <label for="title">Meeting Title </label>
+                <div class="mb-3">
+                  <input class="form-control" list="title" formControlName="title">
+                  <datalist id="title">
+
+                  </datalist>
+                </div>
+                <span style="color: red;"
+                  *ngIf="isFormSubmitted &&  form.controls['title'].invalid">
+                  Meeting title is a required field.<br />
+                </span>
+                <span style="color: red;" *ngIf="form.controls['title'].invalid && form.controls['title'].dirty">
+                  Meeting title should not exceed 25 characters.<br />
+                </span>
+              </div>
+
+              <div class="mb-3">
+                <label for="physianName" class="form-label">Physician Name</label>
+
+                <div class="mb-3" *ngIf="!physicianName; else elseBlock">
+                  <input type="text" class="form-control" id="physianName" list="physicianList" name="physianName"
+                    formControlName="physianName" (change)="setId($event)" />
+                  <datalist id="physicianList">
+                    <option *ngFor="let user of physicianObj" [value]=user.name>
+                    </option>
+                  </datalist>
+                </div>
+                <span style="color: red;"
+                  *ngIf="isFormSubmitted &&  form.controls['physianName'].invalid ">
+                  Physian Name is a required field.<br />
+                </span>
+                <ng-template #elseBlock>
+                  <div class="mb-3">
+                    <input class="form-control" formControlName="physianName" [(ngModel)]="physicianName"
+                      [readonly]="true" />
+                  </div>
+                </ng-template>
+              </div>
+
+              <div class="mb-3">
+                <label for="physicianId">Physician Id</label>
+                <div class="mb-3">
+                  <input class="form-control" formControlName="physicianId" [(ngModel)]="physiId" [readonly]="true" />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="patientName" class="form-label">Patient Name</label>
+                <div class="mb-3" *ngIf="!patiName; else elseBl">
+                  <input type="text" class="form-control" id="patientName" list="patientList" name="patientName"
+                    formControlName="patientName" (change)="setpatientId($event)" />
+                  <datalist id="patientList">
+                    <option *ngFor="let user of patientObj" [value]=user.name>
+                    </option>
+                  </datalist>
+                  <span style="color: red;"
+                  *ngIf="isFormSubmitted &&  form.controls['patientName'].invalid ">
+                  Patient Name is a required field.<br />
+                </span>
+                </div>
+                <ng-template #elseBl>
+                  <div class="mb-3">
+                    <input class="form-control" formControlName="patientName" [(ngModel)]="patiName"
+                      [readonly]="true" />
+                  </div>
+                </ng-template>
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Appoinment Date</label>
+                <div class="mb-3">
+                  <input class="form-control" type="date" id="inputDate" name="inputDate" formControlName="date" [(ngModel)]="appoiDatestr"
+                    min="2019-01-01T00:00:00" max="2030-12-31T00:00:00" required (change)="checkCurrentDate($event)"/>
+
+                </div>
+                <span style="color: red;"
+                  *ngIf="isFormSubmitted &&  form.controls['date'].invalid">
+                  Appoinment Date is a required field.<br />
+                </span>
+                <span style="color: red;" *ngIf="form.controls['date'].invalid && form.controls['date'].touched">
+                  Not able to schedule appointment for this date. Please select the valid date.<br />
+                </span>
+              </div>
+              
+              <div class="mb-3">
+                <label for="time" class="form-label">Appoinment Time</label>
+                <div class="mb-3">
+                  <select class="form-control" id="inputTime" name="inputTime" formControlName="time" (change)="checkApointments($event)">
+                    <option>09:00 AM to 10:00 AM</option>
+                    <option>10:00 AM to 11:00 AM</option>
+                    <option>11:00 AM to 12:00 PM</option>
+                    <option>12:00 PM to 01:00 PM</option>
+                    <option>02:00 PM to 03:00 PM</option>
+                    <option>03:00 PM to 04:00 PM</option>
+                    <option>04:00 PM to 05:00 PM</option>
+                    <option>05:00 PM to 06:00 PM</option>
+                    <option>06:00 PM to 07:00 PM</option>
+                    <option>07:00 PM to 08:00 PM</option>
+                  </select>
+                </div>
+              </div>
+              <span style="color: red;" *ngIf=" form.controls['physianName'].value == '' || form.controls['patientName'].value == ''">
+                {{message1}}
+              </span>
+
+              
+              <div class="form-group mb-3">
+                <label for="description" class="form-label">Appointment Description </label>
+                <textarea id="description" rows="5" class="form-control" type="text"
+                  formControlName="description"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-outline-primary" (click)="btncancel_click()"> Cancel </button>
+              <span *ngIf="!form.valid" style="color: red;">{{ message}}</span>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

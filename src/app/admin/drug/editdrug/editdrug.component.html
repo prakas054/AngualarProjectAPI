@@ -1,0 +1,81 @@
+
+<style>
+    .error {
+   color: red;
+}
+</style>
+
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>
+  
+  <div class="content-wrapper">    
+    <section class="content-header">      
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">         
+            <div class="col-md-12">            
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Drug Master Form</h3>
+                </div>               
+              
+                <form [formGroup]="form" id="form" (submit)="frn_drug_click()">
+                 
+                    <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="drugName">Drug Name *</label>
+                                <input formControlName="drugName" type="text" class="form-control" placeholder="Drug Name">
+                                <span *ngIf="form.controls['drugName'].invalid && form.controls['drugName'].dirty && form.hasError('required','drugName')" class="error">Please enter a Drug Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="drugManufactureName">Drug Manufacture Name *</label>
+                                <input formControlName="drugManufactureName" type="text" class="form-control" placeholder="Drug Manufacture Name">
+                                <span *ngIf="form.controls['drugManufactureName'].invalid && form.controls['drugManufactureName'].dirty && form.hasError('required','drugManufactureName')" class="error">Please enter a Drug Manufacture Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="drugStrength">Drug Strength *</label>
+                                <input formControlName="drugStrength" type="text" class="form-control" placeholder="Drug Strength">
+                                <span *ngIf="form.controls['drugStrength'].invalid && form.controls['drugStrength'].dirty && form.hasError('required','drugStrength')" class="error">Please enter a Drug Strength</span>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="drugGenericName">Drug Generic Name *</label>
+                                <input type="text" formControlName="drugGenericName" class="form-control" placeholder="Drug Generic Name">
+                                <span *ngIf="form.controls['drugGenericName'].invalid && form.controls['drugGenericName'].dirty && form.hasError('required','drugGenericName')" class="error">Please enter a Drug Generic Name</span>
+                            </div> 
+                            
+                            <div class="form-group">
+                                <label for="drugForm">Drug Form *</label>
+                                <input type="text" formControlName="drugForm" class="form-control" placeholder="Drug Form">
+                                <span *ngIf="form.controls['drugForm'].invalid && form.controls['drugForm'].dirty && form.hasError('required','drugForm')" class="error">Please enter a Drug Fotm</span>
+                            </div> 
+                        </div>                        
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="col-md-12 bg-light text-right">
+                      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+                      <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+  </div>
+
+  
+  
+   
+

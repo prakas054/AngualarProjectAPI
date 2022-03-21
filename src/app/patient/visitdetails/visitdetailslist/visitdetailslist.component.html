@@ -1,0 +1,213 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+
+<div class="content-wrapper">
+    <section class="content-header">
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Visit Details</b></h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+
+                                    <div class="card  card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Vital Signs</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-body table-responsive p-0">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="heightid">Height (in cm)</label> : <span>{{height}} cm</span>
+                                                            <!-- <input  type="text" class="form-control" [(ngModel)]="height" > -->
+                                                        </div>
+                            
+                                                        <div class="form-group">
+                                                            <label for="weightid">Weight (in Kg)</label> : <span>{{weight}} kg</span>
+                                                            <!-- <input  type="text" class="form-control" [(ngModel)]="weight" > -->
+                                                        </div>
+                            
+                                                        <div class="form-group">
+                                                            <label for="pressureid">Blood Pressure (systolic / diastolic in mm Hg)</label> : <span>{{bloodpressure}}  mm Hg</span>
+                                                            <!-- <input  type="text" class="form-control" [(ngModel)]="bloodpressure"  > -->
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="temperature">Body Temperature (in Fahrenheit)</label> : <span>{{temperature}} Fahrenheit</span>
+                                                            <!-- <input type="text"  class="form-control" [(ngModel)]="temperature" >   -->
+                                                        </div> 
+                                                        
+                                                        <div class="form-group">
+                                                            <label for="respiration">Respiration Rate (in BPM)</label> : <span>{{respiration}} BPM</span>
+                                                            <!-- <input type="text"  class="form-control" [(ngModel)]="respiration" > -->
+                                                        </div>   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <div class="col-md-12 bg-light text-right">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card  card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Diagnosis Details</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-body table-responsive p-0">
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Diagnosis Code</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of visitHistory.diagnoses; let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item.diagnosis_Code}}</td>
+                                                            <td>{{item.diagnosis_Description}}</td>
+                                                            <!-- <td>Yes</td>
+                                                            <td>notes</td> -->
+
+                                                        </tr>
+
+                                                        <tr *ngIf="visitHistory.diagnoses <= 0"  class="bg3">
+                                                            <td colspan="3" style="text-align: center;">Diagnosis Details are not available. </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <div class="col-md-12 bg-light text-right">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card  card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Procedure Details</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-body table-responsive p-0">
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Procedure Code</th>
+                                                            <th>Description</th>
+                                                            <!-- <th>Procedure Is Depricated</th>
+                                                            <th>Notes</th> -->
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of visitHistory.procedures; let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item.procedure_Code}}</td>
+                                                            <td>{{item.procedure_Description}}</td>
+                                                            <!-- <td>Yes</td>
+                                                            <td>notes</td> -->
+
+                                                        </tr>
+                                                        <tr *ngIf="visitHistory.procedures <= 0"  class="bg3">
+                                                            <td colspan="3" style="text-align: center;">Procedure Details are not available. </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <div class="col-md-12 bg-light text-right">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card  card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Medication Details</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-body table-responsive p-0">
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Drug Name</th>
+                                                            <th>Drug Generic Name</th>
+                                                            <th>Drug Form</th>
+                                                            <th>Dosage</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of visitHistory.medications; let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item.drug_Name}}</td>
+                                                            <td>{{item.drug_Generic_Name}}</td>
+                                                            <td>{{item.drug_Form}}</td>
+                                                            <td>{{item.dosage}}</td>
+                                                            <td>{{item.description}}</td>
+                                                            <!-- <td>name</td>
+                                                            <td>name</td>
+                                                            <td>form</td> -->
+
+                                                        </tr>
+                                                        <tr *ngIf="visitHistory.medications <= 0"  class="bg3">
+                                                            <td colspan="6" style="text-align: center;">Medication Details are not available. </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <div class="col-md-12 bg-light text-right">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="col-md-12 bg-light text-right">
+                                <button type="button" class="btn btn-default mr-2 float-right"
+                                    (click)="btncancel_click()">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,78 @@
+
+<style>
+    .error {
+   color: red;
+}
+</style>
+
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>
+
+  
+  <div class="content-wrapper">
+    
+    <section class="content-header">      
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">         
+            <div class="col-md-12">            
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Procedure Master Form</h3>
+                </div>               
+              
+                <form [formGroup]="form" id="form" (submit)="frn_procedure_click()">
+                 
+                    <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="procedureCode">Procedure Code <span style="color: red;">*</span></label>
+                                <input formControlName="procedureCode" type="text" class="form-control" placeholder="procedure Code">
+                                <span *ngIf="form.controls['procedureCode'].invalid && form.controls['procedureCode'].dirty && form.hasError('required','procedureCode')" class="error">Please enter Procedure Code</span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Procedure Is Depricated:<span style="color: red;">*</span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <input id="yes" type="radio" class="form-check-input" value="yes" name="procedureDepricated" formControlName="procedureDepricated">
+                                <label class="form-check-label" for="Yes">Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="no" type="radio" class="form-check-input" value="no" name="procedureDepricated" formControlName="procedureDepricated">
+                                <label class="form-check-label" for="No">No</label>
+                            </div> 
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="procedureDescription">Diagnosis Description <span style="color: red;">*</span></label>
+                            <input type="text" formControlName="procedureDescription" class="form-control" placeholder="procedure Description">
+                            <span *ngIf="form.controls['procedureDescription'].invalid && form.controls['procedureDescription'].dirty && form.hasError('required','procedureDescription')" class="error">Please enter procedure Description</span>
+                          </div>
+                      </div>                
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="col-md-12 bg-light text-right">
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+                    <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+    </section>
+  </div>
+
+  
+  
+   
+

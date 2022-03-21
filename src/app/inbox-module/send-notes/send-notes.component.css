@@ -1,0 +1,46 @@
+.card{
+    margin-top: 00px;
+    /* border: none; */
+    padding: 30px;
+    /* position: absolute; */
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid rgb(133, 140, 236);
+    /* background: rgb(204, 230, 227);
+    background: linear-gradient(90deg, rgb(204, 230, 227)0%, rgb(204, 230, 227)100%); */
+    display: inline-block;
+}
+
+.card h2{
+    color:rgb(84, 151, 228);
+    font-family: fantasy;
+}
+
+label{
+    color: rgb(53, 55, 138);
+}
+
+
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  mat-drawer {
+    width: 250px;
+    background: #2c3344 !important;
+
+    color: aliceblue;
+  }
+  
+  mat-drawer-container {
+    height: 100%;
+  }
+  
+  mat-drawer-content {
+    padding: 20px;
+  }
+
+  

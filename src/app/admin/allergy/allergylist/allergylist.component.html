@@ -1,0 +1,74 @@
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>  
+   
+
+    <div class="content-wrapper">
+    
+      <section class="content-header">      
+      </section>
+      <section class="content">
+          <div class="container-fluid">
+            <div class="row">         
+              <div class="col-md-12">            
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Allergy List</h3>
+                  </div>               
+                
+                  <div class="example-header">
+                    <!-- <mat-form-field>
+                      <input matInput (keyup)="applyFilter($any($event.target.value))" 
+                                     placeholder="Filter">
+                    </mat-form-field> -->
+
+                    <button type="button" class="btn btn-primary float-right" (click)="btn_add()">Add New</button>
+                  </div>
+
+                  <div class="example-container mat-elevation-z8">
+
+                    <mat-table [dataSource]="dataSource" matSort>
+                  
+                     
+                      <ng-container matColumnDef="allergy_Code">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Allergy Code </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.allergy_Code}} </mat-cell>                        
+                      </ng-container>
+                  
+                    
+                      <ng-container matColumnDef="allergy_Type">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Allergy Type </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.allergy_Type}} </mat-cell>
+                      </ng-container>
+                  
+                     
+                      <ng-container matColumnDef="allergy_Name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Allergy Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.allergy_Name}} </mat-cell>
+                      </ng-container>
+                  
+                    
+                      <ng-container matColumnDef="allergy_Clinical_Information">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Clinical Information </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.allergy_Clinical_Information}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Actions">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [routerLink]="['/allergyedit', row.allergy_Id]"> <a href="javascript:void(0)">Edit</a>   </mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>

@@ -1,0 +1,78 @@
+\<app-header>
+</app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4">
+
+</app-patient-navbar>
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Patient Visit Details</h1>
+                </div>
+                <!-- <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item" [routerLink]="['/visit-detail']"><a href="javascript:void(0)">Home</a></li>
+              <li class="breadcrumb-item" [routerLink]="['/visit-allergydetail']"><a href="javascript:void(0)">Allergy</a></li>
+              <li class="breadcrumb-item" [routerLink]="['/visit-vitaldetail']"><a href="javascript:void(0)">Vital Sign</a></li>
+              <li class="breadcrumb-item" [routerLink]="['/visit-allergydetail']"><a href="javascript:void(0)">Diagnosis</a></li>
+              <li class="breadcrumb-item" [routerLink]="['/visit-allergydetail']"><a href="javascript:void(0)">Procedure</a></li>
+              <li class="breadcrumb-item" [routerLink]="['/visit-allergydetail']"><a href="javascript:void(0)">Medication</a></li>
+            </ol>
+          </div> -->
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Visit Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap" matSort (matSortChange)="sortData($event)">
+                                    <thead>
+                                        <tr>
+                                            <th ></th>
+                                            <th mat-sort-header="userName">User</th>
+                                            <th mat-sort-header="height">Height</th>
+                                            <th mat-sort-header="weight">Weight</th>
+                                            <th mat-sort-header="visit_Date">Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of visitHistory; let i = index">
+                                            <td>{{i +1}}</td>
+                                            <td>{{userName}}</td>
+                                            <td>{{item.height}}</td>
+                                            <td>{{item.weight}}</td>
+                                            <td>{{item.visit_Date | date : "dd-MM-yyyy"}}</td>
+                                            <td [routerLink]="['/visit-details-list', item.visit_Id]"><a href="javascript:void(0)" >View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <!-- <div class="col-md-12 bg-light text-right">
+                        <button type="button" class="btn btn-default ml-2">Previous</button>
+                        <button type="button" class="btn btn-default ml-2" [routerLink]="['/visit-vitaldetail']">Next</button>
+                    </div> -->
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

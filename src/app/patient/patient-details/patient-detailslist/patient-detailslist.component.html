@@ -1,0 +1,74 @@
+<app-header></app-header> 
+<app-patient-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>  
+   
+
+    <div class="content-wrapper">
+    
+      <section class="content-header">      
+      </section>
+      <section class="content">
+          <div class="container-fluid">
+            <div class="row">         
+              <div class="col-md-12">            
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Patient Details List</h3>
+                  </div>               
+                
+                  <!-- <div class="example-header">
+                    <button type="button" class="btn btn-primary float-right" (click)="btn_add()">Add New</button>
+                  </div> -->
+
+                  <div class="example-container mat-elevation-z8">
+
+                    <mat-table [dataSource]="dataSource" matSort>
+                  
+                     
+                      <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>                        
+                      </ng-container>
+                      <ng-container matColumnDef="firstName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+                      </ng-container>   
+                      <ng-container matColumnDef="lastName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+                      </ng-container>  
+                      
+                      <!-- <ng-container matColumnDef="emailId">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.emailId}}</mat-cell>
+                      </ng-container> -->
+
+                      <ng-container matColumnDef="contactNo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.contactNo}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="View">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> View </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [routerLink]="['/patientdetailsview', row.patient_Id]"> <a href="javascript:void(0)">View</a></mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Actions">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [routerLink]="['/patientdetailsedit', row.patient_Id]"> <a href="javascript:void(0)">Edit</a></mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>

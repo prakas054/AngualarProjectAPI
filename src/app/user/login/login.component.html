@@ -1,0 +1,59 @@
+<style>
+    .error{
+        color: red;
+    }
+</style>
+
+<div class="hold-transition login-page">
+<div class="login-box">
+<div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <a class="h1" [routerLink]=" ['/']"><b>PMS</b></a>
+    </div>
+    <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>       
+
+        <form [formGroup]="loginForm" (submit)="login_click()">
+              <div class="input-group mb-3">
+                   <input formControlName="email" type="email" placeholder="Email" class="form-control" />
+
+                   <div class="input-group-append">
+                          <div class="input-group-text">
+                             <span class="fas fa-envelope"></span>
+                          </div>
+                   </div>
+              </div>              
+              <span id="email-error-msg" *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].dirty" class="error">Please Enter Valid EmailId</span>                  
+
+              <div class="input-group mb-3">
+                   <input formControlName="password" type="password" placeholder="Password" class="form-control" />
+
+                   <div class="input-group-append">
+                         <div class="input-group-text">
+                             <span class="fas fa-lock"></span>
+                         </div>
+                   </div>
+            </div>
+            <span *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].dirty && loginForm.hasError('pattern', 'password')" class="error">Enter valid password</span>
+            
+            <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5" style="text-align: right;">
+                    <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Sign In</button>
+                    
+                </div>
+            </div>
+        </form>
+        
+
+        <p class="mb-1">
+            <a routerLink="/forgotpwd" >Forgot Password</a>
+        </p>
+
+        <p class="mb-1">            
+            <a href="/patientregister">Register for New User</a>
+        </p>
+    </div>
+</div>
+</div>
+</div>

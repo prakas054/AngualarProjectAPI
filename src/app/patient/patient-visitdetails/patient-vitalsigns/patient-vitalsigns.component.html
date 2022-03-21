@@ -1,0 +1,101 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="margin-top: 5%;">
+
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h2 class="card-title"><b>Vital Sign</b></h2>
+                    </div>
+                    <div class="card-body" (ngSubmit)="submitForm()" [formGroup]="vitaldetail">
+
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="Height(in cm)"
+                                formControlName="height" />
+                            <br>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-text-height"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: red;" *ngIf="isFormSubmitted && vitaldetail.controls['height'].invalid">
+                            Please provide Patient height in cms.<br />
+                        </span>
+                        <span style="color: red;"
+                            *ngIf="vitaldetail.controls['height'].dirty && vitaldetail.controls['height'].errors">
+                            Please check Patient height and provide the data in cms.<br /></span>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="Weight(in kg)"
+                                formControlName="weight" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-weight"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: red;" *ngIf="isFormSubmitted && vitaldetail.controls['weight'].invalid">
+                            Please provide Patient weight in kg.<br />
+                        </span>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Body Temperature (in Fahrenheit)"
+                                formControlName="bodytemperature" /><br>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-thermometer"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: red;"
+                            *ngIf="isFormSubmitted && vitaldetail.controls['bodytemperature'].invalid">
+                            Please provide Patient Body Temperature.<br />
+                        </span>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Respiration Rate (in BPM) "
+                                formControlName="respirationrate" /><br>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lungs"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: red;"
+                            *ngIf="isFormSubmitted && vitaldetail.controls['respirationrate'].invalid">
+                            Please provide Patient Respiration Rate (in BPM).<br />
+                        </span>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control"
+                                placeholder="Blood Pressure (systolic / diastolic in mm Hg)"
+                                formControlName="bloodpressure" /><br>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-bong"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: red;"
+                            *ngIf="isFormSubmitted && vitaldetail.controls['bloodpressure'].invalid">
+                            Please provide Patient’s Blood Pressure (systolic / diastolic in mm Hg).<br />
+                        </span>
+
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default mr-2 float-left"
+                                (click)="btnCancel_click()">Cancel</button>
+                            <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                            <button type="button" class="btn btn-default mr-2 float-right"
+                                [routerLink]="['/patientdiagnosis']">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>

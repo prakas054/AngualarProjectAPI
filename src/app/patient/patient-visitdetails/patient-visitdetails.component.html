@@ -1,0 +1,427 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Patient Visit Details</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+          
+      <form (ngSubmit)="submitForm()">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-12 col-sm-12">
+            <div class="card card-primary card-outline card-tabs">
+            <div class="card-header p-0 pt-1 border-bottom-0">
+              <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                  <li class="nav-item">
+                  <a class="nav-link active" id="custom-tabs-three-vital-tab" data-toggle="pill" href="#custom-tabs-three-vital" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Vital Signs</a>
+                  </li>
+            
+                  <li class="nav-item">
+                   <a class="nav-link" id="custom-tabs-three-diagnosis-tab" data-toggle="pill" href="#custom-tabs-three-diagnosis" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Diagnosis</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-procedure-tab" data-toggle="pill" href="#custom-tabs-three-procedure" role="tab" aria-controls="custom-tabs-three-procedure" aria-selected="false">Procedure</a>
+                  </li>
+              
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-medication-tab" data-toggle="pill" href="#custom-tabs-three-medication" role="tab" aria-controls="custom-tabs-three-medication" aria-selected="false">Medication</a>
+                  </li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content" id="custom-tabs-three-tabContent">
+                
+                <div class="tab-pane fade active show" id="custom-tabs-three-vital" role="tabpanel" aria-labelledby="custom-tabs-three-vital-tab">
+                  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                          <input type="number" class="form-control" placeholder="Height(in cm)" formControlName="height" />
+                          <br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-text-height"></span>
+                            </div>
+                          </div> &nbsp;
+                          <input type="number" class="form-control" placeholder="Weight(in kg)" formControlName="weight" />
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-weight"></span>
+                            </div>
+                          </div> &nbsp;
+                        </div>
+                        <span style="color: red;" *ngIf="isFormSubmitted && patientvisitdetail.controls['height'].invalid">
+                          Please provide Patient height in cms.<br />
+                        </span>
+                        <span style="color: red;"
+                          *ngIf="patientvisitdetail.controls['height'].dirty && patientvisitdetail.controls['height'].errors">
+                          Please check Patient height and provide the data in cms.<br /></span>
+
+                        <span style="color: red;" *ngIf="isFormSubmitted && patientvisitdetail.controls['weight'].invalid">
+                          Please provide Patient weight in kg.<br />
+                        </span>
+
+
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                          <input type="text" class="form-control" placeholder="Body Temperature (in Fahrenheit)"
+                            formControlName="bodytemperature" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-thermometer"></span>
+                            </div>
+                          </div>
+                          &nbsp;
+                          <input type="text" class="form-control" placeholder="Respiration Rate (in BPM) "
+                            formControlName="respirationrate" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-lungs"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <span style="color: red;"
+                          *ngIf="isFormSubmitted && patientvisitdetail.controls['bodytemperature'].invalid">
+                          Please provide Patient Body Temperature.<br />
+                        </span>
+                        <span style="color: red;"
+                          *ngIf="isFormSubmitted && patientvisitdetail.controls['respirationrate'].invalid">
+                          Please provide Patient Respiration Rate (in BPM).<br />
+                        </span>
+
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                          <input type="text" class="form-control"
+                            placeholder="Blood Pressure (systolic / diastolic in mm Hg)"
+                            formControlName="bloodpressure" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-bong"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <span style="color: red;"
+                          *ngIf="isFormSubmitted && patientvisitdetail.controls['bloodpressure'].invalid">
+                          Please provide Patient’s Blood Pressure (systolic / diastolic in mm Hg).<br />
+                        </span>
+                        <hr>
+                       
+
+
+                        <!-- <div [formGroup]="patientvisitdetail">
+                          <label>Diagnosis Is Depricated?</label>
+                          Yes<input type="radio" value="yes" name="diagnosisdepriciated"
+                            formControlName="diagnosisdepriciated"><span>
+                          </span>
+                          No<input type="radio" value="no" name="diagnosisdepriciated"
+                            formControlName="diagnosisdepriciated"><span>
+                          </span>
+                        </div>
+                        <span style="color: red;"
+                          *ngIf="isFormSubmitted && patientvisitdetail.controls['diagnosisdepriciated'].invalid">
+                          Kindly provide a response.<br />
+                        </span> -->                    
+
+
+                        <div class="card-footer">
+                          <button type="button" class="btn btn-default mr-2 float-right"
+                            (click)="btnCancel_click()">Cancel</button>
+                          <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                          <span *ngIf="!patientvisitdetail.valid" style="color: red;">{{ message}}</span>
+                        </div>
+
+                        <!-- <div class="card-footer">
+                          <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+                          <button type="button" class="btn btn-default float-right"
+                            (click)="btnCancel_click()">Cancel</button>
+                          <span *ngIf="!patientvisitdetail.valid" style="color: red;">{{ message}}</span>
+                        </div> -->
+
+                      </div>
+                  
+                      </div>
+
+
+                  </div>
+                
+                  <div class="tab-pane fade" id="custom-tabs-three-diagnosis" role="tabpanel" aria-labelledby="custom-tabs-three-diagnosis-tab">
+                    
+                    <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                      <input type="text" class="form-control" placeholder="Diagnosis Code"
+                        formControlName="diagnosiscode" /><br>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-diagnoses"></span>
+                        </div>
+                      </div> &nbsp;
+
+                      <select class="form-control" [(ngModel)]="diagnosisdescription" name="diagnosisdescription"
+                        [ngModelOptions]="{standalone: true}">
+                        <option>Diagnosis Description</option>
+                        <option [value]=" 'd1' ">Diagnosis1</option>
+                        <option [value]=" 'd2' ">Diagnosis2</option>
+                        <option [value]=" 'd3' ">Diagnosis3</option>
+                        <option [value]=" 'd4' ">Diagnosis4</option>
+                        <option [value]=" 'others' ">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-notes-medical"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;"
+                      *ngIf="isFormSubmitted && patientvisitdetail.controls['diagnosiscode'].invalid">
+                      This field cannot be empty.<br />
+                    </span>
+
+                    <div class="showDiv" *ngIf="diagnosisdescription == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Diagnosis details" class="form-control"
+                          formControlName="diagnosisdescription">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['diagnosisdescription'].invalid && patientdetails.controls['diagnosisdescription'].touched">
+                        Please provide Patient’s Diagnosis details.<br />
+                      </span>
+                    </div>
+                  </div>
+               
+                  <div class="tab-pane fade" id="custom-tabs-three-procedure" role="tabpanel" aria-labelledby="custom-tabs-three-procedure-tab">
+
+                  
+                    <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                      <input type="text" class="form-control" placeholder="Procedure Code"
+                        formControlName="procedurecode" /><br>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-procedures"></span>
+                        </div>
+                      </div> &nbsp;
+                      <select class="form-control" [(ngModel)]="proceduredescription" name="proceduredescription"
+                        [ngModelOptions]="{standalone: true}">
+                        <option>Procedure Description</option>
+                        <option [value]="'p1'">Procedure1</option>
+                        <option [value]="'p1'">Procedure2</option>
+                        <option [value]="'p1'">Procedure3</option>
+                        <option [value]="'p1'">Procedure4</option>
+                        <option [value]="'others'">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-notes-medical"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;"
+                      *ngIf="isFormSubmitted && patientvisitdetail.controls['procedurecode'].invalid">
+                      This field cannot be empty.<br />
+                    </span>
+
+                    <div class="showDiv" *ngIf="proceduredescription == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Procedure details" class="form-control"
+                          formControlName="proceduredescription">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['proceduredescription'].invalid && patientdetails.controls['proceduredescription'].touched">
+                        Please provide Patient’s Procedure details.<br />
+                      </span>
+                    </div>
+
+
+                    <div [formGroup]="patientvisitdetail">
+                      <label>Procedure Is Depricated?</label>
+                      Yes<input type="radio" value="yes" name="procedureisdepriciated"
+                        formControlName="procedureisdepriciated"><span>
+                      </span>
+                      No<input type="radio" value="no" name="procedureisdepriciated"
+                        formControlName="procedureisdepriciated"><span>
+                      </span>
+                    </div>
+                    <span style="color: red;"
+                      *ngIf="isFormSubmitted && patientvisitdetail.controls['procedureisdepriciated'].invalid">
+                      Kindly provide a response.<br />
+                    </span>
+                  </div>
+               
+                  <div class="tab-pane fade" id="custom-tabs-three-medication" role="tabpanel" aria-labelledby="custom-tabs-three-medication-tab">
+                   
+                    <div class="input-group mb-3" [formGroup]="patientvisitdetail">
+                      <select class="form-control" [(ngModel)]="drugid" name="drugid" formControlName="drugid">
+                        <option value="">Drug ID</option>
+                        <option [value]="'id1'">Drug1</option>
+                        <option [value]="'id2'">Drug2</option>
+                        <option [value]="'id3'">Drug3</option>
+                        <option [value]="'id4'">Drug4</option>
+                        <option [value]="'others'">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-pills"></span>
+                        </div>
+                      </div> &nbsp;
+                      <select class="form-control">
+                        <option>Drug Name</option>
+                        <option [value]="'n1'">Drug1</option>
+                        <option [value]="'n2'">Drug2</option>
+                        <option [value]="'n3'">Drug3</option>
+                        <option [value]="'n4'">Drug4</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-notes-medical"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <span style="color: red;" *ngIf="isFormSubmitted && patientvisitdetail.controls['drugid'].errors">
+                      This field cannot be empty.<br />
+                    </span>
+
+                    <div class="showDiv" *ngIf="drugid == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Medication ID details" class="form-control"
+                          formControlName="drugdetails">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                        Please provide Patient’s Medication details.<br />
+                      </span>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                      <select class="form-control" [(ngModel)]="druggenericname" name="druggenericname">
+                        <option>Drug Generic Name</option>
+                        <option [value]="'g1'">Drug1</option>
+                        <option [value]="'g2'">Drug2</option>
+                        <option [value]="'g3'">Drug3</option>
+                        <option [value]="'g4'">Drug4</option>
+                        <option [value]="'others'">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-notes-medical"></span>
+                        </div>
+                      </div>&nbsp;
+                      <select class="form-control" [(ngModel)]="drugbrandname" name="drugbrandname">
+                        <option>Drug Brand Name</option>
+                        <option [value]="'b1'">Drug1</option>
+                        <option [value]="'b2'">Drug2</option>
+                        <option [value]="'b3'">Drug3</option>
+                        <option [value]="'b4'">Drug4</option>
+                        <option [value]="'others'">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-notes-medical"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="showDiv" *ngIf="druggenericname == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Medication Generic Name details" class="form-control"
+                          formControlName="drugdetails">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                        Please provide Patient’s Medication details.<br />
+                      </span>
+                    </div>
+                    <div class="showDiv" *ngIf="drugbrandname == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Medication Brand Name details" class="form-control"
+                          formControlName="drugdetails">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                        Please provide Patient’s Medication details.<br />
+                      </span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <select class="form-control" [(ngModel)]="drugform" name="drugform">
+                        <option>Drug Form</option>
+                        <option [value]="'f1'">Drug1</option>
+                        <option [value]="'f2'">Drug2</option>
+                        <option [value]="'f3'">Drug3</option>
+                        <option [value]="'f4'">Drug4</option>
+                        <option [value]="'others'">Others</option>
+                      </select>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-angle-down"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="showDiv" *ngIf="drugform == 'others' " [formGroup]="patientdetails">
+                      <div class="input-group mb-3">
+                        <input type="text" placeholder="Medication Form details" class="form-control"
+                          formControlName="drugdetails">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-notes-medical"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span style="color: red;"
+                        *ngIf="patientdetails.controls['drugdetails'].invalid && patientdetails.controls['drugdetails'].touched">
+                        Please provide Patient’s Medication details.<br />
+                      </span>
+                    </div>
+                  </div>
+              </div>
+            </div>   
+
+            </div>
+            </div>                 
+            </div>
+        
+        
+
+
+            
+          
+        </div>
+    
+      </form>
+       
+    </div>
+  </section>
+</div>

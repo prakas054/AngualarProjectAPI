@@ -1,0 +1,111 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="margin-top: 5%;">
+
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h2 class="card-title"><b>Allergy Details</b></h2>
+                    </div>
+                    <div class="card-body" [formGroup]="allergy">
+
+                        <div class="input-group mb-3">
+                            <input type="tel" placeholder="Allergy ID" class="form-control" formControlName="allergy_Id"
+                                onfocus="(placeholder='Enter WHO/IUIS Allergen Nomenclature ID, if known')" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-allergies"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <select class="form-control" [(ngModel)]="allergy.value.allergyType" name="allergyType"
+                                formControlName="allergyType">
+                                <option value="">Allergy Type</option>
+                                <option [value]=" 'food' ">Food</option>
+                                <option [value]=" 'insect' ">Insect</option>
+                                <option [value]=" 'fungi' ">Fungi</option>
+                                <option [value]=" 'bacteria' ">Bacteria</option>
+                                <option [value]=" 'others' ">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-notes-medical"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="showDiv" *ngIf="allergy.value.allergyType == 'others' " [formGroup]="allergy">
+                            <div class="input-group mb-3">
+                                <input type="text" placeholder="Allergy Type Details" class="form-control"
+                                    formControlName="allergytypedetail">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-notes-medical"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- <span style="color: red;"
+          *ngIf="allergy.controls['allergytypedetail'].errors?.['required'] && allergy.controls['allergytypedetail'].touched">
+          Allergy type details is a required field.<br />
+        </span>
+        <span style="color: red;"
+          *ngIf="allergy.controls['allergytypedetail'].dirty && allergy.controls['allergytypedetail'].errors">
+          Please don’t use abbreviations<br/></span> -->
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <select class="form-control" formControlName="allergyName">
+                                <option value="">Allergy Name</option>
+                                <option>Allergy1</option>
+                                <option>Allergy2</option>
+                                <option>Allergy3</option>
+                                <option>Allergy4</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-notes-medical"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <textarea placeholder="Allergy Description" class="form-control"
+                                formControlName="description"></textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-notes-medical"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <textarea placeholder="Allergy Clinical Information" class="form-control"
+                                formControlName="clinical_Information"></textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-book-medical"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default mr-2 float-left"
+                                (click)="btnCancel_click()">Cancel</button>
+                            <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                            <button type="button" class="btn btn-default mr-2 float-right"
+                                [routerLink]="['/patientvitaldetails']">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="margin-top: 5%;">
+
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h2 class="card-title"><b>Procedure</b></h2>
+                    </div>
+                    <div class="card-body" (ngSubmit)="submitForm()" [formGroup]="procedure">
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Procedure Code"
+                              /><br>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-diagnoses"></span>
+                              </div>
+                            </div> 
+                          </div>
+                          <div class="input-group mb-3">
+                            <select class="form-control"name="diagnosisdescription"
+                              >
+                              <option value="">Procedure Description</option>
+                              <option [value]=" 'd1' ">Diagnosis1</option>
+                              <option [value]=" 'd2' ">Diagnosis2</option>
+                              <option [value]=" 'd3' ">Diagnosis3</option>
+                              <option [value]=" 'd4' ">Diagnosis4</option>
+                              <option [value]=" 'others' ">Others</option>
+                            </select>
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-notes-medical"></span>
+                              </div>
+                            </div>
+                          </div>
+      
+                          
+                            <div class="input-group mb-3">
+                              <textarea type="text" placeholder="Notes" class="form-control"
+                                ></textarea>
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-notes-medical"></span>
+                                </div>
+                              </div>
+                            </div>
+                            
+                          
+      
+      
+                          <!-- <div [formGroup]="patientvisitdetail">
+                            <label>Diagnosis Is Depricated?</label>
+                            Yes<input type="radio" value="yes" name="diagnosisdepriciated"
+                              formControlName="diagnosisdepriciated"><span>
+                            </span>
+                            No<input type="radio" value="no" name="diagnosisdepriciated"
+                              formControlName="diagnosisdepriciated"><span>
+                            </span>
+                          </div>
+                          <span style="color: red;"
+                            *ngIf="isFormSubmitted && patientvisitdetail.controls['diagnosisdepriciated'].invalid">
+                            Kindly provide a response.<br />
+                          </span> -->
+      
+                        
+
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default mr-2 float-left"
+                                (click)="btnCancel_click()">Cancel</button>
+                            <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                            <button type="button" class="btn btn-default mr-2 float-right" [routerLink]="['/patientdrug']">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,137 @@
+<style>
+    .example-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+      }
+      
+      .example-header {
+        min-height: 64px;
+        padding: 8px 24px 0;
+      }
+      
+      .mat-form-field {
+        font-size: 14px;
+        width: 100%;
+      }
+      
+      .mat-table {
+        overflow: auto;
+        max-height: 500px;
+      }
+      
+    </style>
+    
+    <app-header></app-header> 
+    <app-admin-navbar 
+        class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>  
+       
+    
+        <div class="content-wrapper">
+        
+          <section class="content-header">      
+          </section>
+          <section class="content">
+              <div class="container-fluid">
+                <div class="row">         
+                  <div class="col-md-12">            
+                    <div class="card card-primary">
+                      <div class="card-header">                        
+                        <h3 class="card-title">Hospital User List</h3>
+                      </div>               
+                    
+                      <div class="example-header">
+                        <div class="row">
+                          <div class="col-md-1">
+                            Filter By                            
+                          </div>
+                          <div class="col-md-3">                           
+                            <select [(ngModel)]="strFilterkey" class="form-control">
+                              <option>employeeId</option>
+                              <option>name</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-3">
+                            <input type="text" class="form-control" [(ngModel)]="strFiltervalue"/>
+                          </div>
+
+                                                 
+                          <div class="col-md-3 col-sm-3">
+                            <button class="btn btn-primary" (click)="search()">Search</button>
+                            &nbsp;<button class="btn btn-default" (click)="reset()">Reset</button>
+                          </div>
+                        </div>
+                      </div>
+    
+                      <div class="example-container mat-elevation-z8">
+    
+                        <table mat-table [dataSource]="dataSource" matSort>  
+                      
+                          <ng-container matColumnDef="EmployeeId">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> EmployeeId </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.employeeId}} </mat-cell>
+                          </ng-container>
+                        
+                          <ng-container matColumnDef="Title">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                          </ng-container>
+                      
+                         
+                          <ng-container matColumnDef="Name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="DOJ">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Joining Date </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.doj | date: "yyyy-MM-dd"}} </mat-cell>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="Role">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+                          </ng-container>  
+
+                          <ng-container matColumnDef="Status">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+                          </ng-container>      
+
+                          <ng-container matColumnDef="Actions">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell> 
+                            <mat-cell *matCellDef="let row">
+                              <td *ngIf="row.status == 'Active'">
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId, 'Inactive')">Deactive</a> | 
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId,'Block')">Block</a> 
+                              </td>  
+                              
+                              <td *ngIf="row.status == 'Inactive'">
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId,'Active')">Active</a> | 
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId,'Block')">Block</a> 
+                              </td>  
+
+                              <td *ngIf="row.status == 'Block'">
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId,'Active')">Active</a> | 
+                                <a href="javascript:void(0)" (click)="updatestatus(row.userId,'Inactive')">Deactive</a> 
+                              </td>  
+                            </mat-cell>
+                          </ng-container>
+                      
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;">
+                          </mat-row>
+                        </table>
+                      
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    
+                        
+                      </div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </section>
+        </div>

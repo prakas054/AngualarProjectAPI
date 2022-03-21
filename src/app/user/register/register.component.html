@@ -1,0 +1,146 @@
+<app-header></app-header>
+<app-admin-navbar></app-admin-navbar>
+<div class="content-wrapper">
+
+    <section class="content-header">
+    </section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title"><b>Hospital User Register</b></h3>
+                    </div>
+                    <form [formGroup]="userRegForm" (submit)="submitForm()">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <div [formGroup]="userRegForm">
+                                        <label>Title:<span style="color: red;">*</span></label>
+                                            Mr.<input type="radio" name="title" value="mr" checked="false"
+                                                formControlName="title"><span>
+                                            </span> &nbsp;&nbsp;&nbsp;
+                                            Ms.<input type="radio" name="title" value="ms" checked="false"
+                                                formControlName="title"><span>
+                                            </span>&nbsp;&nbsp;&nbsp;
+                                            Mrs.<input type="radio" name="title" value="mrs" checked="false"
+                                                formControlName="title"><span>
+                                            </span>&nbsp;&nbsp;&nbsp;
+                                            Dr.<input type="radio" name="title" value="dr" checked="false"
+                                                formControlName="title"><span>
+                                            </span>&nbsp;&nbsp;&nbsp;
+                                            <span style="color: red;"
+                                                *ngIf="isFormSubmitted && userRegForm.controls['title'].errors?.['required']">
+                                                Kindly select the title.
+                                            </span>
+                                    </div> -->
+
+                                    <div class="input-group mb-3" [formGroup]="userRegForm" >
+                                        
+                                        <div>
+                                            <select class="form-control" formControlName="title">
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Ms.">Ms.</option>
+                                                <option value="Mrs.">Mrs.</option>
+                                                <option value="Dr.">Dr.</option>
+                                            </select>
+                                       </div>
+                                        &nbsp;
+
+                                        <input type="text" placeholder="First Name" class="form-control" formControlName="firstname" /><br>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user"></span>
+                                            </div>
+                                        </div> &nbsp;
+
+                                        <input type="text" placeholder="Last Name" class="form-control"
+                                                formControlName="lastname" />
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user"></span>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <span style="color: red;"
+                                            *ngIf="isFormSubmitted && userRegForm.controls['firstname'].invalid && userRegForm.controls['firstname'].dirty">
+                                            First name cannot be empty.<br /></span>
+                                        <!-- <span style="color: red;"
+                                            *ngIf="userRegForm.controls['firstname'].dirty && userRegForm.controls['firstname'].errors">
+                                            Please don’t use abbreviations in first name field<br /></span> -->
+                                        <span style="color: red;"
+                                            *ngIf="isFormSubmitted && userRegForm.controls['lastname'].invalid && userRegForm.controls['lastname'].dirty">
+                                            Last name cannot be empty.<br /></span>
+                                        <!-- <span style="color: red;"
+                                            *ngIf="userRegForm.controls['lastname'].dirty && userRegForm.controls['lastname'].errors">
+                                            Please don’t use abbreviations in last name field<br /></span> -->
+
+                                            <div class="input-group mb-3" [formGroup]="userRegForm">
+                                                <input type="email" placeholder="Email" class="form-control"
+                                                    formControlName="email" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-envelope"></span>
+                                                    </div>
+                                                </div> &nbsp;
+                                                <input type="text" placeholder="Date Of Birth" class="form-control"
+                                                    onfocus="(this.type='date')" formControlName="dob" [(ngModel)]="dob" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <span style="color: red;"
+                                            *ngIf="isFormSubmitted && userRegForm.controls['email'].invalid">
+                                            Please enter your email address<br /></span>
+                                    <span style="color: red;"
+                                            *ngIf="userRegForm.controls['email'].dirty && userRegForm.controls['email'].errors">
+                                            The required pattern ex: exampleusername@xyzdomain.com<br /></span>
+                                           
+                                            <span style="color: red;"
+                                            *ngIf="isFormSubmitted && userRegForm.controls['dob'].invalid">
+                                            Please enter a date.<br /></span>
+                                             <span style="color: red;"
+                                            *ngIf="userRegForm.controls['dob'].dirty && userRegForm.controls['dob'].errors">
+                                            Please enter a valid date of birth</span>
+                                            
+                                            
+                                            <div class="input-group mb-3" [formGroup]="userRegForm">
+                                                  <input class="form-control" formControlName='role' required list="StatusOptions" id="StatusList" placeholder="Please select role.">
+                                                  
+                                                  <datalist id="StatusOptions">
+                                                    <option value="Physician">
+                                                    <option value="Nurse">
+                                                    <option value="Admin">
+                                                  </datalist>&nbsp;
+
+                                                  <input type="text" placeholder="Employee ID " class="form-control" [readonly]="disablefld"
+                                                       formControlName="employeeId" />
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-user"></span>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <span class="text-danger" *ngIf="userRegForm.controls['role'].touched && userRegForm.hasError('required','role')">Please select role.</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-md-12 bg-light text-right">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-default ml-2" (click)="btncancel_click()">Cancel</button>                               
+                            </div>                            
+                            <span *ngIf="!userRegForm.valid" style="color: red;">{{message1}}</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

@@ -1,0 +1,758 @@
+<style>
+          .error {
+          color: red;
+        }
+
+        .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+</style>
+
+
+
+<app-header></app-header>
+<app-physician-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-physician-navbar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Patient Visit Details</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+     
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-12 col-sm-12">
+            <div class="card card-primary card-outline card-tabs">
+            <div class="card-header p-0 pt-1 border-bottom-0">
+              <ul class="nav nav-tabs" id="custom-tabs-five-tab" role="tablist">
+                
+                <li class="nav-item">
+                  <a class="nav-link active" id="custom-tabs-five-Patient-details-tab" data-toggle="pill" href="#custom-tabs-five-Patient-details" role="tab" aria-controls="custom-tabs-five-Patient-details" aria-selected="true" 
+                   [ngClass]="{ 'active':activeTab==='custom-tabs-five-Patient-details'}" (click)="tab('custom-tabs-five-Patient-details')" >Patient Details</a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " id="custom-tabs-five-vital-tab" data-toggle="pill" href="#custom-tabs-five-vital" role="tab" aria-controls="custom-tabs-five-vital" aria-selected="false" 
+                    [ngClass]="{ 'active':activeTab==='custom-tabs-five-vital'}" (click)="tab('custom-tabs-five-vital')" >Vital Signs</a>
+                 </li>
+            
+                  <li class="nav-item">
+                   <a class="nav-link" id="custom-tabs-five-diagnosis-tab" data-toggle="pill" href="#custom-tabs-five-diagnosis" role="tab" aria-controls="custom-tabs-five-diagnosis" aria-selected="false"
+                   [ngClass]="{ 'active':activeTab==='custom-tabs-five-diagnosis'}" (click)="tab('custom-tabs-five-diagnosis')">Diagnosis</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-five-procedure-tab" data-toggle="pill" href="#custom-tabs-five-procedure" role="tab" aria-controls="custom-tabs-five-procedure" aria-selected="false"
+                    [ngClass]="{ 'active':activeTab==='custom-tabs-five-procedure'}" (click)="tab('custom-tabs-five-procedure')">Procedure</a>
+                  </li>
+              
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-five-medication-tab" data-toggle="pill" href="#custom-tabs-five-medication" role="tab" aria-controls="custom-tabs-five-medication" aria-selected="false"
+                    [ngClass]="{ 'active':activeTab==='custom-tabs-five-medication'}" (click)="tab('custom-tabs-five-medication')">Medication</a>
+                  </li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content" id="custom-tabs-five-tabContent">
+                
+                <div class="tab-pane fade active show" id="custom-tabs-five-Patient-details" role="tabpanel" aria-labelledby="custom-tabs-five-Patient-details"
+                 [ngClass]="{ 'active show':activeTab==='custom-tabs-five-Patient-details'}">
+                  
+                 <div class="col-12" style="margin-bottom: 25px;">
+                      <label> Select Patient</label>  
+                      <!-- (change)="showTableOnSelection($event)" -->
+                      <input type="text" class="form-control" list="PatientList" name="PatientFullName" placeholder="Patient"                                
+                      [(ngModel)]="PatientFullName" (change)="filterPatientListById($event)" >
+                  
+                      <datalist id="PatientList">
+                        <option *ngFor="let item of patientList" [value]=item.name>
+                       </option>
+                      </datalist>
+                   </div>
+               
+                      <div *ngIf="isSelected">
+  
+                        <section class="content">
+                          <div class="container-fluid">
+                            <div class="row">         
+                              <div class="col-md-12">            
+                                <div class="card card-primary">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Demographic Details</h3>
+                                  </div>                        
+                
+                                  <div class="card-body">
+
+                                    <table id="example2" class="table table-bordered table-hover" style="width: 100%;">
+                                      <tr >
+                                        <td style="text-align: left;"><b>First Name</b></td>
+                                        <td style="text-align: left;"> {{ fname }} </td> 
+                                        <td style="text-align: left;"><b>Last Name</b></td>
+                                        <td style="text-align: left;"> {{ lname }} </td>                                       
+                                      </tr>                                      
+                                      <tr >
+                                        <td style="text-align: left;"><b>Email</b></td>
+                                        <td style="text-align: left;"> {{ email }} </td>  
+                                        <td style="text-align: left;"><b>DOB</b></td>
+                                        <td style="text-align: left;"> {{ dob | date:"yyyy-MM-dd" }} </td>                                     
+                                      </tr>                                      
+                                      <tr >
+                                        <td style="text-align: left;"><b>Contact No</b></td>
+                                        <td style="text-align: left;"> {{ contactNo }} </td>  
+                                        <td style="text-align: left;"><b>Address</b></td>
+                                        <td style="text-align: left;"> {{ address }} </td>                                     
+                                      </tr>                                      
+                                      <tr >
+                                        <td style="text-align: left;"><b>Age</b></td>
+                                        <td style="text-align: left;"> {{ age }} </td> 
+                                        <td style="text-align: left;"><b>Race</b></td>
+                                        <td style="text-align: left;"> {{ race }} </td>                                          
+                                      </tr>                                     
+                                      <tr >
+                                        <td style="text-align: left;"><b>Ethinicity</b></td>
+                                        <td style="text-align: left;"> {{ ethinicity }} </td> 
+                                        <td style="text-align: left;"><b>Languages known</b></td>
+                                        <td style="text-align: left;"> {{ language }} </td>                                       
+                                      </tr> 
+                                    </table>
+                                    <hr/>
+                                    <section class="content">
+                                      <div class="container-fluid">
+                                        <div class="row">         
+                                          <div class="col-md-12">            
+                                            <div class="card card-primary">
+                                              <div class="card-header">
+                                                <h3 class="card-title">Emergency Contact Details</h3>
+                                              </div>                        
+                            
+                                              <div class="card-body">
+                                                <table id="example2" class="table table-bordered table-hover" style="width: 100%;">
+                                                  <tr >
+                                                    <td style="text-align: left;"><b>First Name</b></td>
+                                                    <td style="text-align: left;"> {{ efname }} </td> 
+                                                    <td style="text-align: left;"><b>Last Name</b></td>
+                                                    <td style="text-align: left;"> {{ elname }} </td>                                       
+                                                  </tr>                                      
+                                                  <tr >
+                                                    <td style="text-align: left;"><b>Email</b></td>
+                                                    <td style="text-align: left;"> {{ eEmail }} </td>  
+                                                    <td style="text-align: left;"><b>Contact No</b></td>
+                                                    <td style="text-align: left;"> {{ eContactNo }} </td>                                  
+                                                  </tr>                                      
+                                                  <tr >
+                                                    <td style="text-align: left;"><b>RelationShip</b></td>
+                                                    <td style="text-align: left;"> {{ erelation }} </td>  
+                                                    <td style="text-align: left;"><b>Address</b></td>
+                                                    <td style="text-align: left;"> {{ address }} </td>                                     
+                                                  </tr>  
+                                                </table>
+                                                </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+
+                                    <hr/>
+                                    <section class="content">
+                                      <div class="container-fluid">
+                                        <div class="row">         
+                                          <div class="col-md-12">            
+                                            <div class="card card-primary">
+                                              <div class="card-header">
+                                                <h3 class="card-title">Allergy Details</h3>
+                                              </div>                        
+                            
+                                              <div class="card-body">
+                                                <table id="example2" class="table table-bordered table-hover" style="width: 100%;">
+                                                  <thead>
+                                                    <tr>
+                                                      <th>Allergy Code</th>
+                                                      <th>Allergy Name</th>
+                                                      <th>Allergy Type</th>
+                                                      <th>Description</th>
+                                                      <th>Clinical Information</th>
+                                                      <th>Is Allergy Fatal</th>                                                      
+                                                    </tr>
+                                                  </thead>                                    
+                                                  <tbody>
+                                                    <tr *ngFor="let allergy of allergyList">
+                                                      <td style="text-align: left;">{{allergy.allergy_Code}}</td>
+                                                      <td style="text-align: left;">{{allergy.allergy_Type}}</td>
+                                                      <td style="text-align: left;">{{allergy.allergy_Name}}</td>
+                                                      <td style="text-align: left;">{{allergy.description}}</td>
+                                                      <td style="text-align: left;">{{allergy.clinical_Information}}</td>
+                                                      <td style="text-align: left;">{{allergy.is_Allergy_Fatal | isdepricated}}</td>                                                      
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                                </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </section>
+
+                                  </div>
+                                
+                                </div>
+                              </div>
+                            </div>
+
+ 
+
+                          </div>
+                      </section>
+
+                       
+                      </div>
+
+                  </div>
+
+                <div class="tab-pane fade" id="custom-tabs-five-vital" role="tabpanel" aria-labelledby="custom-tabs-five-vital-tab"
+                 [ngClass]="{ 'active show':activeTab==='custom-tabs-five-vital'}">
+                  <form [formGroup]="patientvisitdetail_vital" (submit)="vitaldata_click()">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail_vital">
+                          <input type="text" class="form-control" placeholder="Height(in cm)" formControlName="height" />
+                          <br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-text-height"></span>
+                            </div>
+                          </div>
+                          
+                          &nbsp;
+                          
+                          <input type="text" class="form-control" placeholder="Weight(in kg)" formControlName="weight"  />
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-weight"></span>
+                            </div>
+                          </div>
+                          
+                          &nbsp;
+
+                          <input type="text" class="form-control" placeholder="Body Temperature (in Fahrenheit)"
+                            formControlName="bodytemperature" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-thermometer"></span>
+                            </div>
+                          </div>
+                          &nbsp;
+                        </div>
+                        <span style="color: red;" *ngIf="patientvisitdetail_vital.controls['height'].invalid && patientvisitdetail_vital.controls['height'].dirty">
+                          Please provide Patient height in cms allowable max hight limit is 250 cm.<br />
+                        </span>
+                        
+                        <span style="color: red;" *ngIf="patientvisitdetail_vital.controls['weight'].invalid && patientvisitdetail_vital.controls['weight'].dirty">
+                          Please provide Patient weight in kg. Can enter two digit decimal <br />
+                        </span>
+
+
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail_vital">
+                         
+                          <input type="text" class="form-control" placeholder="Respiration Rate (in BPM) "
+                            formControlName="respirationrate" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-lungs"></span>
+                            </div>
+                          </div>
+                          &nbsp;
+
+                          <input type="text" class="form-control"
+                            placeholder="Blood Pressure (systolic / diastolic in mm Hg)"
+                            formControlName="bloodpressure" /><br>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-bong"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <span style="color: red;"
+                          *ngIf=" patientvisitdetail_vital.controls['bodytemperature'].invalid && patientvisitdetail_vital.controls['bodytemperature'].dirty">
+                          Please provide Patient Body Temperature.<br />
+                        </span>
+                        <span style="color: red;"
+                          *ngIf="patientvisitdetail_vital.controls['respirationrate'].invalid && patientvisitdetail_vital.controls['respirationrate'].dirty">
+                          Please provide Patient Respiration Rate (in BPM).<br />
+                        </span>
+
+                        <div class="input-group mb-3" [formGroup]="patientvisitdetail_vital">                          
+
+                          <input type="text" class="form-control"
+                          placeholder="Note" formControlName="note" /><br>
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-bong"></span>
+                          </div>
+                        </div>
+
+                        </div>
+                        <span style="color: red;"
+                          *ngIf="patientvisitdetail_vital.controls['bloodpressure'].invalid && patientvisitdetail_vital.controls['bloodpressure'].dirty">
+                          Please provide Patient’s Blood Pressure (systolic / diastolic in mm Hg).<br />
+                        </span>
+                        <hr>
+                       
+
+
+                        <div class="card-footer">
+                          <button type="button" class="btn btn-default mr-2 float-right"
+                            (click)="btnCancel_click()">Cancel</button>
+                          <button type="submit" [disabled]="patientvisitdetail_vital.invalid" class="btn btn-primary mr-2 float-right">Submit</button>
+                          <!-- <span *ngIf="!patientvisitdetail_vital.valid" style="color: red;">{{ message}}</span> -->
+                        </div>
+
+
+                      </div>
+                  
+                      </div>
+                  </form>
+
+                  </div>
+                
+                  <div class="tab-pane fade" id="custom-tabs-five-diagnosis" role="tabpanel" aria-labelledby="custom-tabs-five-diagnosis-tab"
+                   [ngClass]="{ 'active show':activeTab==='custom-tabs-five-diagnosis'}">
+                  
+                    <form [formGroup]="patientvisitdetail_diagnosis" (submit)="diagnosis_submit_click()">
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="diagnosiscode">Diagnosis Code <span style="color: red;">*</span></label>
+                                  <input formControlName="diagnosiscode" type="text" class="form-control" list="DiagnosisCodeList" name="diagnosiscode" [(ngModel)]="CodeDiagnosis" (change) = "setDiagnosisDescription($event)">
+                                  <datalist id="DiagnosisCodeList">
+                                    <option *ngFor="let code of ListDiagnosisArray" [value] = code.diagnosis_Code>                                      
+                                    </option>
+                                  </datalist>
+                                  <!-- <b>{{CodeDiagnosis}}</b> -->
+                                  <span *ngIf="patientvisitdetail_diagnosis.controls['diagnosiscode'].invalid && patientvisitdetail_diagnosis.controls['diagnosiscode'].dirty && patientvisitdetail_diagnosis.hasError('required','diagnosiscode')" class="error">Please enter a Diagnosis Code</span>
+                              </div> 
+                              
+                              <div class="form-group">
+                                <label>Diagnosis Is Depricated:<span style="color: red;">*</span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+                              
+                                <input id="yes" type="radio" class="form-check-input" value="true" name="procedureisdepriciated" formControlName="procedureisdepriciated">
+                                <label class="form-check-label" for="Yes">Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="no" type="radio" class="form-check-input" value="false" name="procedureisdepriciated" formControlName="procedureisdepriciated">
+                                <label class="form-check-label" for="No">No</label>
+                                
+                            </div> 
+                          </div>
+                        
+                          <div class="col-md-6">
+                            
+                              <div class="form-group">
+                                  <label for="diagnosisdescription">Diagnosis Description <span style="color: red;">*</span></label>
+                                  <input type="text" formControlName="diagnosisdescription" class="form-control" List="DiagnosisDescList" name="diagnosisdescription" [(ngModel)]="DescDiagnosis" (change)="setDiagnosisCode($event)">
+                                  <datalist id="DiagnosisDescList">
+                                    <option *ngFor="let code of ListDiagnosisArray" [value] = code.diagnosis_Description >
+
+                                    </option>
+                                  </datalist>
+                                  <!-- <b>{{DescDiagnosis}}</b> -->
+                                  <span *ngIf="patientvisitdetail_diagnosis.controls['diagnosisdescription'].invalid && patientvisitdetail_diagnosis.controls['diagnosisdescription'].dirty && patientvisitdetail_diagnosis.hasError('required','diagnosisdescription')" class="error">Please enter a Diagnosis Description</span>
+                              </div> 
+                          </div>      
+                          
+                          <div class="col-md-12">
+                            
+                            <div class="form-group">
+                                <label for="note">Note <span style="color: red;">*</span></label>
+                                <input type="text" formControlName="note" class="form-control" />
+                            </div> 
+                        </div>      
+                      </div>
+
+                      <div class="card-footer">
+                        <div class="col-md-12 bg-light text-right">
+                        <button  class="btn btn-primary" [disabled]="!patientvisitdetail_diagnosis.valid" (click)="addDiangnosis()">Add</button>
+                        </div>
+                      </div>
+
+                      <div id="table">
+                        <section class="content-header">      
+                        </section>
+                        <section class="content">
+                            <div class="container-fluid">
+                              <div class="row">         
+                                <div class="col-md-12">            
+                                  <div class="card card-primary">
+                                    <div class="card-header">
+                                      <h3 class="card-title"> Patient Diagnosis List</h3>
+                                    </div>      
+                  
+                                    <div class="example-container mat-elevation-z8">
+                  
+                                      <table mat-table [dataSource]="dataSource" matSort>  
+                                                        
+                                        <ng-container matColumnDef="diagnosiscode">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Diagnosis Code </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.diagnosis_Code}} </mat-cell>                        
+                                        </ng-container>
+                                    
+                                      
+                                        <ng-container matColumnDef="diagnosisdescription">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Diagnosis Description </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.diagnosis_Description}} </mat-cell>
+                                        </ng-container>
+                                    
+                                       
+                                        <ng-container matColumnDef="procedureisdepriciated">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Is Depricated </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.diagnosis_Is_Depricated | displaypipe}} </mat-cell>
+                                        </ng-container> 
+                                        
+                                        <ng-container matColumnDef="Actions">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> <a href="javascript:void(0)"  (click)="deleteDiagnosis(row.diagnosis_Code)">Delete</a></mat-cell>
+                                        </ng-container> 
+                                    
+                                       
+                                    
+                                        <mat-header-row *matHeaderRowDef="displayedColumns_Diagnosis"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns_Diagnosis;">
+                                        </mat-row>
+                                        
+                                      </table>
+                                      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+                                      
+                                    </div>
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </section>
+                      </div>
+
+                      <div class="card-footer">
+                        <div class="col-md-12 bg-light text-right">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                        </div>
+                      </div>
+
+                    </form>
+                   
+                  </div>
+
+               
+                  <div class="tab-pane fade" id="custom-tabs-five-procedure" role="tabpanel" aria-labelledby="custom-tabs-five-procedure-tab"
+                       [ngClass]="{ 'active show':activeTab==='custom-tabs-five-procedure'}">
+                        <form [formGroup]="patientvisitdetail_procedure" (submit)="procedure_submit_click()">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="procedurecode">Procedure Code <span style="color: red;">*</span></label>
+                                    <input formControlName="procedurecode" type="text" class="form-control" List="ListProcedureCode" [ngModel]="CodeProcedure" (change) = "setProcedureDescription($event)">
+                                    <datalist id="ListProcedureCode">
+                                      <option *ngFor="let pcode of ListProcedureArray" [value]="pcode.procedure_Code"></option>
+                                    </datalist>
+                                    <span *ngIf="patientvisitdetail_procedure.controls['procedurecode'].invalid && patientvisitdetail_procedure.controls['procedurecode'].dirty && patientvisitdetail_procedure.hasError('required','procedurecode')" class="error">Please enter a Procedure Code </span>
+                                    
+                                </div> 
+                                
+                                <div class="form-group">
+                                  <label>Procedure Is Depricated:<span style="color: red;">*</span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                                  <input id="yes" type="radio" class="form-check-input" value="yes" name="procedureisdepriciated" formControlName="procedureisdepriciated">
+                                  <label class="form-check-label" for="Yes">Yes</label>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <input id="no" type="radio" class="form-check-input" value="no" name="procedureisdepriciated" formControlName="procedureisdepriciated">
+                                  <label class="form-check-label" for="No">No</label>
+                                  
+                              </div> 
+                            </div>
+                          
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="proceduredescription">Procedure  Description <span style="color: red;">*</span></label>
+                                    <input type="text" formControlName="proceduredescription" class="form-control" List="ListProcedureDescription" [(ngModel)]="DescProcedure"  (change)="setProcedureCode($event)">
+                                    <datalist id="ListProcedureDescription">
+                                      <option *ngFor="let pdesc of ListProcedureArray" [value]="pdesc.procedure_Description" >
+
+                                      </option>
+
+                                    </datalist>
+                                    <span *ngIf="patientvisitdetail_procedure.controls['proceduredescription'].invalid && patientvisitdetail_procedure.controls['proceduredescription'].dirty && patientvisitdetail_procedure.hasError('required','proceduredescription')" class="error">Please enter  Procedure Description</span>
+                                </div> 
+                            </div>    
+                            
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="note">Note</label>
+                                  <input type="text" formControlName="note" class="form-control" />
+                              </div> 
+                          </div>    
+                        </div>
+
+                        <div class="card-footer">
+                          <div class="col-md-12 bg-light text-right">
+                          <button  class="btn btn-primary" [disabled]="!patientvisitdetail_procedure.valid" (click)="addProcedure()">Add</button>
+                          </div>
+                        </div>
+
+                        <div id="table">
+                          <section class="content-header">      
+                          </section>
+                          <section class="content">
+                              <div class="container-fluid">
+                                <div class="row">         
+                                  <div class="col-md-12">            
+                                    <div class="card card-primary">
+                                      <div class="card-header">
+                                        <h3 class="card-title"> Patient Procedure List</h3>
+                                      </div>      
+                    
+                                      <div class="example-container mat-elevation-z8">
+                    
+                                        <table mat-table [dataSource]="dataSource1" matSort>  
+                                                          
+                                          <ng-container matColumnDef="procedurecode">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Procedure Code </mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.procedure_Code}} </mat-cell>                        
+                                          </ng-container>
+                                      
+                                        
+                                          <ng-container matColumnDef="proceduredescription">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Procedure Description </mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.procedure_Description}} </mat-cell>
+                                          </ng-container>
+                                      
+                                         
+                                          <ng-container matColumnDef="procedureisdepriciated">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Is Procedure Depricated </mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.procedure_Is_Depricated | displaypipe}} </mat-cell>
+                                          </ng-container>                     
+                                      
+                                          <ng-container matColumnDef="Actions">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> <a href="javascript:void(0)"  (click)="deleteProcedure(row.procedure_Code)">Delete</a></mat-cell>
+                                          </ng-container> 
+                                      
+                                          <mat-header-row *matHeaderRowDef="displayedColumns_procedure"></mat-header-row>
+                                          <mat-row *matRowDef="let row; columns: displayedColumns_procedure;">
+                                          </mat-row>
+                                          
+                                        </table>
+                                        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator> -->
+                                        
+                                      </div>
+                                    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </section>
+                        </div>
+
+                        <div class="card-footer">
+                          <div class="col-md-12 bg-light text-right">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                          </div>
+                        </div>
+
+                      </form>
+                  </div>
+               
+                  <div class="tab-pane fade" id="custom-tabs-five-medication" role="tabpanel" aria-labelledby="custom-tabs-five-medication-tab"
+                      [ngClass]="{ 'active show':activeTab==='custom-tabs-five-medication'}">
+                    
+                      <form [formGroup]="patientvisitdetail_medication" (submit)="medication_submit_click()" >
+                 
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="drugid">Drug Id <span style="color: red;">*</span></label>
+                                  <input formControlName="drugid" type="text" class="form-control" List="DrugList" (change)="setValueOnSelectionDrugId($event)" [(ngModel)]="Drug_ID">
+                                  <datalist id="DrugList" >
+                                    <option *ngFor="let drugcode of drugList" [value]="drugcode.drug_ID">
+
+                                    </option>
+
+                                  </datalist>
+                                  <span *ngIf="patientvisitdetail_medication.controls['drugid'].invalid && patientvisitdetail_medication.controls['drugid'].dirty && patientvisitdetail_medication.hasError('required','drugid')" class="error">Please enter  Drug Id</span>
+                                  
+                              </div>
+  
+                              <div class="form-group">
+                                  <label for="drugname">Drug Name <span style="color: red;">*</span></label>
+                                  <input formControlName="drugname" type="text" class="form-control" List="DrugList1" [(ngModel)]="Drug_Name" (change)="setOnDrugName($event)">
+                                  <datalist id="DrugList1" name="drugname" >
+                                      <option *ngFor="let drugcode of drugList" [value]="drugcode.drug_Name">
+
+                                      </option>
+                                  </datalist>
+                                  <span *ngIf="patientvisitdetail_medication.controls['drugname'].invalid && patientvisitdetail_medication.controls['drugname'].dirty && patientvisitdetail_medication.hasError('required','drugname')" class="error">Please enter  Drug  Name</span>
+                              </div>
+  
+                              <div class="form-group">
+                                  <label for="druggenericname">Drug Generic Name <span style="color: red;">*</span></label>
+                                  <input formControlName="druggenericname" type="text" class="form-control" [(ngModel)]="Drug_Generic_Name">
+                                  <span *ngIf="patientvisitdetail_medication.controls['druggenericname'].invalid && patientvisitdetail_medication.controls['druggenericname'].dirty && patientvisitdetail_medication.hasError('required','druggenericname')" class="error">Please enter Drug Generic Name</span>
+                              </div>
+                          </div>
+                         
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="drugbrandname">Drug Brand Name <span style="color: red;">*</span></label>
+                                  <input type="text" formControlName="drugbrandname" class="form-control" [(ngModel)]="Drug_Brand_Name">
+                                  <span *ngIf="patientvisitdetail_medication.controls['drugbrandname'].invalid && patientvisitdetail_medication.controls['drugbrandname'].dirty && patientvisitdetail_medication.hasError('required','drugbrandname')" class="error">Please enter  Drug Brand Name</span>
+                              </div> 
+                              
+                              <div class="form-group">
+                                  <label for="drugform">Drug Form <span style="color: red;">*</span></label>
+                                  <input type="text" formControlName="drugform" class="form-control" List="drugList" [(ngModel)]="Drug_Form" >
+                                  <datalist id="drugList">
+                                    <option *ngFor="let drug of drugList" [value]="drug.drug_Form">
+
+                                    </option>
+                                  </datalist>
+                                  <span *ngIf="patientvisitdetail_medication.controls['drugform'].invalid && patientvisitdetail_medication.controls['drugform'].dirty && patientvisitdetail_medication.hasError('required','drugform')" class="error">Kindly provide a response</span>
+                              </div> 
+
+                              <div class="form-group">
+                                <label for="dosage">Dosage <span style="color: red;">*</span></label>
+                                <input formControlName="dosage" type="text" class="form-control" [(ngModel)]="Dosage">                                
+                            </div>
+                              
+                            </div>    
+                            
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="note">Note</label>
+                                  <input type="text" formControlName="note" class="form-control" />
+                              </div> 
+                          </div>   
+                      </div>
+
+                      <div class="card-footer">
+                        <div class="col-md-12 bg-light text-right">
+                        <button  class="btn btn-primary" [disabled]="!patientvisitdetail_medication.valid" (click)="addMedication()">Add</button>
+                        </div>
+                      </div>
+
+                      <div id="table">
+                        <section class="content-header">      
+                        </section>
+                        <section class="content">
+                            <div class="container-fluid">
+                              <div class="row">         
+                                <div class="col-md-12">            
+                                  <div class="card card-primary">
+                                    <div class="card-header">
+                                      <h3 class="card-title"> Patient Procedure List</h3>
+                                    </div>      
+                  
+                                    <div class="example-container mat-elevation-z8">
+                  
+                                      <table mat-table [dataSource]="dataSource2" matSort>  
+                                                        
+                                        <ng-container matColumnDef="drugid">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Drug Id </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.drug_ID}} </mat-cell>                        
+                                        </ng-container>
+                                    
+                                      
+                                        <ng-container matColumnDef="drugname">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Drug Name  </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.drug_Name}} </mat-cell>
+                                        </ng-container>
+                                    
+                                       
+                                        <ng-container matColumnDef="druggenericname">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Drug Generic Name </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.drug_Generic_Name }} </mat-cell>
+                                        </ng-container>       
+                                        
+                                        <ng-container matColumnDef="drugbrandname">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Drug Brand Name </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.drug_Manufacture_Name }} </mat-cell>
+                                        </ng-container> 
+                                    
+                                        <ng-container matColumnDef="drugform">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Drug Form </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> {{row.drug_Form }} </mat-cell>
+                                        </ng-container>                                       
+                                    
+                                        <ng-container matColumnDef="Action">
+                                          <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                                          <mat-cell *matCellDef="let row"> <a href="javascript:void(0)"  (click)="deleteMedication(row.drug_ID)">Delete</a></mat-cell>
+                                        </ng-container> 
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns_medication"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns_medication;">
+                                        </mat-row>
+                                        
+                                      </table>
+                                      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+                                      
+                                    </div>
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </section>
+                      </div>
+                    
+                    <div class="card-footer">
+                      <div class="col-md-12 bg-light text-right">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>                               
+                    </div>                     
+                    </div>
+                    </form>
+
+                    </div>
+
+              </div>
+            </div>
+            </div>   
+
+            </div>
+            </div>                 
+            </div>
+       
+          
+      
+       
+    </div>
+  </section>
+</div>
+

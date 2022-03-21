@@ -1,0 +1,91 @@
+<style>
+    .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+</style>
+
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>  
+   
+
+    <div class="content-wrapper">
+    
+      <section class="content-header">      
+      </section>
+      <section class="content">
+          <div class="container-fluid">
+            <div class="row">         
+              <div class="col-md-12">            
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Procedure List</h3>
+                  </div>               
+                
+                  <div class="example-header">
+                    <!-- <mat-form-field>
+                      <input matInput (keyup)="applyFilter($any($event.target.value))" 
+                                     placeholder="Filter">
+                    </mat-form-field> -->
+
+                    <button type="button" class="btn btn-primary float-right" (click)="btn_add()">Add New</button>
+                  </div>
+
+                  <div class="example-container mat-elevation-z8">
+
+                    <table mat-table [dataSource]="dataSource" matSort>                  
+                     
+                      <ng-container matColumnDef="procedure_Code">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Procedure Code </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.procedure_Code}} </mat-cell>                        
+                      </ng-container>
+                  
+                    
+                      <ng-container matColumnDef="procedure_Description">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Procedure Description </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.procedure_Description}} </mat-cell>
+                      </ng-container>
+                  
+                     
+                      <ng-container matColumnDef="procedure_Is_Depricated">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Is Depricated </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.procedure_Is_Depricated | displaypipe}} </mat-cell>
+                      </ng-container>                     
+                  
+                      <ng-container matColumnDef="Actions">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [routerLink]="['/procedureEdit', row.procedure_ID]"> <a href="javascript:void(0)">Edit</a>   </mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>

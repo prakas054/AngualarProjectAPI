@@ -1,0 +1,192 @@
+<app-header *ngIf="true"></app-header> 
+<app-physician-navbar *ngIf="true"></app-physician-navbar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" style="margin-top: 5%;">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><b>Patient Register</b></h3>
+                </div>
+                <form (submit)="submit_click()">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- <div [formGroup]="patientReg">
+                                    <label>Title:<span style="color: red;">*</span></label>
+                                    Mr.<input type="radio" name="title" value="mr" checked="false"
+                                        formControlName="title"><span>
+                                    </span>
+                                    Ms.<input type="radio" name="title" value="ms" checked="false"
+                                        formControlName="title"><span>
+                                    </span>
+                                    Mrs.<input type="radio" name="title" value="mrs" checked="false"
+                                        formControlName="title"><span>
+                                    </span>
+                                    Dr.<input type="radio" name="title" value="dr" checked="false"
+                                        formControlName="title"><span>
+                                    </span>
+                                    <span style="color: red;"
+                                        *ngIf="isFormSubmitted && patientReg.controls['title'].errors?.['required']">
+                                        Kindly select the title.
+                                    </span>
+                                </div> -->
+                                <div class="form-group clearfix" [formGroup]="patientReg">
+                                    <label>Title:<span style="color: red;">*</span></label>&nbsp;
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioPrimary1" name="title" value="Mr." formControlName="title" >
+                                      <label for="radioPrimary1">Mr.
+                                      </label>&nbsp;
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioPrimary2" name="title" value="Ms." formControlName="title">
+                                      <label for="radioPrimary2">Ms.
+                                      </label>&nbsp;
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioPrimary3" name="title" value="Mrs." formControlName="title">
+                                      <label for="radioPrimary3">Mrs.
+                                      </label>&nbsp;
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioPrimary4" name="title" value="Dr." formControlName="title">
+                                      <label for="radioPrimary4">Dr.
+                                      </label>&nbsp;
+                                    </div>
+                                    <span style="color: red;"
+                                      *ngIf="isFormSubmitted && patientReg.controls['title'].errors?.['required']">
+                                      Kindly select the title.
+                                    </span>
+                                  </div>
+              
+                                <div class="input-group mb-3" [formGroup]="patientReg">
+                                    <input type="text" placeholder="First Name" class="form-control"
+                                        formControlName="fname" /><br>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div> &nbsp;
+
+                                    <input type="text" placeholder="Last Name" class="form-control"
+                                        formControlName="lname" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['fname'].invalid">
+                                    First name cannot be empty.<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['fname'].dirty && patientReg.controls['fname'].errors">
+                                    Please don’t use abbreviations in first name field<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['lname'].invalid">
+                                    Last name cannot be empty.<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['lname'].dirty && patientReg.controls['lname'].errors">
+                                    Please don’t use abbreviations in last name field<br /></span>
+
+                                <div class="input-group mb-3" [formGroup]="patientReg">
+                                    <input type="email" placeholder="Email" class="form-control"
+                                        formControlName="email" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div> &nbsp;
+                                    <input type="tel" placeholder="Contact Number" class="form-control"
+                                         formControlName="phone" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-phone"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['email'].invalid">
+                                    Please enter your email address<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['email'].dirty && patientReg.controls['email'].errors">
+                                    The required pattern ex: exampleusername@xyzdomain.com<br /></span>
+
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['phone'].invalid">
+                                    Please enter contact number<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['phone'].dirty && patientReg.controls['phone'].errors">
+                                    Enter the contact number in correct format<br /></span>
+
+                                <div class="input-group mb-3" [formGroup]="patientReg">
+                                    <input type="text" placeholder="Date Of Birth" class="form-control"
+                                        onfocus="(this.type='date')" formControlName="dob" [(ngModel)]="dob" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-calendar"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="color: red;" *ngIf="isFormSubmitted && patientReg.controls['dob'].invalid">
+                                    Please enter a date.<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['dob'].dirty && patientReg.controls['dob'].errors">
+                                    Please enter a valid date of birth</span>
+
+                                <div class="input-group mb-3" [formGroup]="patientReg">
+                                    <input type="text" placeholder="Password" class="form-control" name=password
+                                        id="password" [(ngModel)]="password" formControlName="password" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div> &nbsp;
+                                    <input type="password" placeholder="Confirm Password" class="form-control"
+                                        name=confirmpassword [(ngModel)]="confirmpassword" (mouseout)="mustMatch()"
+                                        formControlName="confirmpassword" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['password'].invalid">
+                                    Password field is required<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="patientReg.controls['password'].invalid &&  patientReg.controls['password'].touched">
+                                    Password is weak. Please re-enter the password with a minimum of one
+                                    Uppercase
+                                    letter, one lowercase letter, one number and minimum length of 8
+                                    characters.<br /></span>
+                                <span style="color: red;"
+                                    *ngIf="isFormSubmitted && patientReg.controls['confirmpassword'].invalid">
+                                    Confirm Password field is required<br /></span>
+                                <span style="color: red;" *ngIf="password !== confirmpassword">Passwords do not
+                                    match. Please
+                                    re-enter
+                                    the password</span>
+
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-default mr-2 float-right"
+                                        (click)="btnCancel_click()">Cancel</button>
+                                    <button type="submit" class="btn btn-primary mr-2 float-right">Submit</button>
+                                    <span *ngIf="!patientReg.valid" style="color: red;">{{ message1}}</span>
+                                </div>
+
+                                <!-- <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-default float-right"
+                                        (click)="btnCancel_click()">Cancel</button>
+                                    <span *ngIf="!patientReg.valid" style="color: red;">{{message1}}</span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>

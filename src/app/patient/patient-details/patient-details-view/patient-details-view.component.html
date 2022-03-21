@@ -1,0 +1,192 @@
+<app-header></app-header>
+<app-patient-navbar class="main-sidebar sidebar-dark-primary elevation-4"></app-patient-navbar>
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h3 class="card-title"><b>Patient Details</b></h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card  card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Demographics</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-body table-responsive p-0">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <!-- <div class="form-group">
+                              <label for="title">Title</label> : <span>{{patientdetails.title}}</span>
+                            </div> -->
+
+                            <div class="form-group">
+                              <label for="fname">First Name</label> : <span>{{FirstName}}</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lname">Date Of Birth</label> : <span>{{DOB | date}}</span>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+
+
+                            <div class="form-group">
+                              <label for="fname">Last Name</label> : <span>{{LastName}}</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lname">Age</label> : <span>{{Age}}</span>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+
+
+                            <div class="form-group">
+                              <label for="fname">Gender</label> : <span>{{Gender}}</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lname">Race</label> : <span>{{Race}}</span>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="fname">Ethnicity</label> : <span>{{Ethnicity}}</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lname">Language</label> : <span>{{Language}}</span>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="fname">Email</label> : <span>{{EmailId}}</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lname">Home Address</label> : <span>{{Address}}</span>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="fname">Contact No</label> : <span>{{ContactNo}}</span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card  card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">Emergency Contact Info</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="card-body table-responsive p-0">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <!-- <div class="form-group">
+                                  <label for="title">Title</label> : <span>{{patientdetails.title}}</span>
+                                </div> -->
+
+                              <div class="form-group">
+                                <label for="fname">First Name</label> :
+                                <span>{{Emergency_FirstName}}</span>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="lname">Email</label> : <span>{{Emergency_EmailId}}</span>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+
+
+                              <div class="form-group">
+                                <label for="fname">Last Name</label> :
+                                <span>{{Emergency_LastName}}</span>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="lname">Contact No</label> :
+                                <span>{{Emergency_ContactNo}}</span>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="fname">Relation</label> : <span>{{Emergency_Relation}}</span>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="fname">Address</label> : <span>{{Emergency_Address}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card  card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Allergy Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Allergy Code</th>
+                                        <th>Allergy Name</th>
+                                        <th>Allergy Type</th>
+                                        <th>Description</th>
+                                        <th>Clinical Information</th>
+                                        <th>Is Allergy Fatal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of patientallergydetail; let i = index">
+                                        
+                                        <td>{{item.allergy_Code}}</td>
+                                        <td>{{item.allergy_Name}}</td>
+                                        <td>{{item.allergy_Type}}</td>
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.clinical_Information}}</td>
+                                        <td>{{item.is_Allergy_Fatal | booleanTransform}}</td>
+                                        
+                                    </tr>
+
+                                    <tr *ngIf="patientallergydetail.length <= 0"  class="bg3">
+                                        <td colspan="7" style="text-align: center;">Allergy Details are not available. </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary mr-2 float-right"
+                      [routerLink]="['/patient-dashboard']">OK</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

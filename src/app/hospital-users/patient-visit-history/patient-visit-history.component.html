@@ -1,0 +1,68 @@
+<app-header>
+</app-header>
+<app-physician-navbar class="main-sidebar sidebar-dark-primary elevation-4">
+</app-physician-navbar>
+
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Patient Visit History</h1>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Patient Visit History Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap" >
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>User</th>
+                                            <th>Height</th>
+                                            <th>Weight</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of allPatientVisitHistory; let i = index">
+                                            <td>{{i +1}}</td>
+                                            <td>{{item.userName}}</td>
+                                            <td>{{item.height}}</td>
+                                            <td>{{item.weight}}</td>
+                                            <td>{{item.visit_Date | date : "dd-MM-yyyy"}}</td>
+                                            <td [routerLink]="['/perticularPatientDetails', item.visit_Id]"><a href="javascript:void(0)" >View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                           
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+

@@ -1,0 +1,77 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  table{
+    width: 100%;
+}
+
+.mat-column-Id { 
+    width: 10% !important;
+    flex: 0 0 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;  
+    word-break: break-word;  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-Title { 
+    width: 10% !important;
+    flex: 0 0 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;  
+    word-break: break-word;  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-Name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;  
+    word-break: break-word;  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-Email {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;  
+    word-break: break-word;  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+

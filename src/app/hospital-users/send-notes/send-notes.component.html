@@ -1,0 +1,68 @@
+
+<app-header></app-header> 
+<app-physician-navbar></app-physician-navbar>
+
+<!-- <app-physician-navbar *ngIf=""></app-physician-navbar>
+<app-nurse-sidenav *ngIf=""></app-nurse-sidenav> -->
+
+<div class="content-wrapper">
+    <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="card col-md-12 mt-2">
+                  <div class="text-center">
+                      <h2>Send Note</h2>
+                  </div>
+                  
+                  <form [formGroup]="form" (submit)="frm_sendnote_click()">
+ 
+                        <div>
+                    
+                            <div class="row form-group mb-3">
+                                <label class="col-sm-2 control-label" for="urgency">Urgency:</label>
+                                <div class="col-sm-6">
+                                    <label class="radio-inline col-sm-3"> <input class="form-check-input" formControlName="urgency"  type="radio" name="urgency" id="urgencyYes" value="Urgent"> Urgent </label>
+                                    <label class="radio-inline col-sm-3"> <input class="form-check-input" formControlName="urgency" type="radio" name="urgency" id="urgencyNo" value="Not Urgent"> Not Urgent </label>
+                                </div>             
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="receiverName">Receiver Name </label>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="receiverName" list="physicianList" name="receiverName"
+                                     formControlName="receiverName" (change) = "setPhysicianId($event)" />
+                                     <span *ngIf="form.controls['receiverName'].invalid && form.controls['receiverName'].touched && form.hasError('required','receiverName')" class="error">Please Select Receiver Name</span>
+                                    <datalist id = "physicianList">
+                                      <option *ngFor="let user of physianObj" [value] = user.name>
+                                      </option>
+                                    </datalist>
+                                  </div>
+                            </div>  
+
+                            <div class="mb-3">
+                                <label for="receiverDesination">Receiver Desination </label>
+                                <div class="mb-3">
+                                    <input class="form-control" formControlName="receiverDesignation" [(ngModel)]="receiverdesignation">
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="message" class="form-label">Message </label>
+                                <textarea id="message" rows="5" class="form-control" type="text" formControlName="message"></textarea>
+                                <span *ngIf="form.controls['message'].invalid && form.controls['message'].touched && form.hasError('required','message')" class="error">Message should have Min character 5 digits and Max 200 Digits</span>
+                            </div>
+                        
+                            <button type="submit"  class="btn btn-primary" [disabled]="form.invalid">Send</button>&nbsp; &nbsp;&nbsp;
+                           
+                            <button class="btn btn-outline-primary">Cancel</button>
+                                
+                            
+                        </div>   
+    
+                    </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

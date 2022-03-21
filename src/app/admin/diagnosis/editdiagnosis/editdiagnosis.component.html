@@ -1,0 +1,78 @@
+
+<style>
+    .error {
+   color: red;
+}
+</style>
+
+<app-header></app-header> 
+<app-admin-navbar 
+    class="main-sidebar sidebar-dark-primary elevation-4"></app-admin-navbar>
+
+  
+  <div class="content-wrapper">
+    
+    <section class="content-header">      
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">         
+            <div class="col-md-12">            
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Diagnosis Master Form</h3>
+                </div>               
+              
+                <form [formGroup]="form" id="form" (submit)="frn_diagnosis_click()">
+                 
+                    <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="diagnosisCode">Diagnosis Code *</label>
+                                <input formControlName="diagnosisCode" type="text" class="form-control" placeholder="Diagnosis Code">
+                                <span id="#diagnosisCode-error-msg" *ngIf="form.controls['diagnosisCode'].invalid && form.controls['diagnosisCode'].dirty && form.hasError('required','diagnosisCode')" class="error">Please enter Diagnosis Code</span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Diagnosis Is Depricated:<span style="color: red;">*</span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <input id="yes" type="radio" class="form-check-input" value="yes" name="diagnosisDepriciated" formControlName="diagnosisDepriciated">
+                                <label class="form-check-label" for="Yes">Yes</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="no" type="radio" class="form-check-input" value="no" name="diagnosisDepriciated" formControlName="diagnosisDepriciated">
+                                <label class="form-check-label" for="No">No</label>
+                            </div> 
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="diagnosisDescription">Diagnosis Description *</label>
+                              <input formControlName="diagnosisDescription" type="text" class="form-control" placeholder="Diagnosis Description">
+                              <span *ngIf="form.controls['diagnosisDescription'].invalid && form.controls['diagnosisDescription'].dirty && form.hasError('required','diagnosisDescription')" class="error">Please enter Diagnosis Description</span>
+                          </div>
+                      </div>                
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="col-md-12 bg-light text-right">
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+                    <button type="button" class="btn btn-default ml-2" (click)="btnCancel_click()">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+    </section>
+  </div>
+
+  
+  
+   
+

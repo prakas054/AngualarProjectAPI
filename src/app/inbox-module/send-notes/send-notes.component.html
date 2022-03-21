@@ -1,0 +1,54 @@
+<app-header></app-header> 
+
+<div class="content-wrapper">
+    <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="card col-md-12 mt-2">
+                  <div class="text-center">
+                      <h2>Send Note</h2>
+                  </div>
+                  
+    <form >
+  
+       
+      <div>
+  
+          <div class="row form-group mb-3">
+              <label class="col-sm-2 control-label" for="urgency">Urgency:</label>
+              <div class="col-sm-6">
+                  <label class="radio-inline col-sm-3"> <input class="form-check-input" formControlName="urgency"  type="radio" name="urgency" id="urgencyYes" value="Yes"> Yes </label>
+                  <label class="radio-inline col-sm-3"> <input class="form-check-input" formControlName="urgency" type="radio" name="urgency" id="urgencyNo" value="No"> No </label>
+                </div>             
+          </div>
+  
+          <div class="mb-3">
+              <label for="receiver">Receiver </label>
+              <div class="mb-3">
+                  <input class="form-control" list="receiver" formControlName="receiver" >
+                      <datalist id="receiver">
+                      
+                      </datalist>       
+              </div>
+          </div>  
+         
+          <div class="form-group mb-3">
+              <label for="message" class="form-label">Message </label>
+              <textarea id="message" rows="5" class="form-control" type="text" formControlName="message"></textarea>
+          </div>
+      
+          <button type="submit"  class="btn btn-primary">Send</button>&nbsp;
+          &nbsp;&nbsp;
+          <button class="btn btn-outline-primary" >
+            Cancel
+          </button>
+      </div>   
+    
+    </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  
+ 

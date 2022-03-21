@@ -1,0 +1,223 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <a href="index3.html" class="brand-link">
+
+    <span>
+      <p style="text-align: center;">PMS</p>
+    </span>
+  </a>
+  <div class="sidebar">
+
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <!-- <div class="image">
+          <img src="assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+        </div> -->
+      <div class="info">
+        <a href="#" class="d-block">{{role}}</a>
+        <a href="#" class="d-block">{{ email }}</a>
+      </div>
+    </div>
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a routerLink="/physician-dashboard" class="nav-link active" *ngIf="role == 'Physician' || role == 'Nurse';">
+            <i class="nav-icon fa fa-home"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+<!--***************************** If Role Is Patient *********************************** -->
+        <li class="nav-item" *ngIf="role == 'Patient'">
+          <a routerLink="/patient-dashboard" class="nav-link active">
+            <i class="nav-icon fa fa-home"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+<!--*********************************************************************************** -->
+<li class="nav-item" *ngIf="role == 'Physician' || role == 'Nurse'">
+  <a  class="nav-link">
+    <i class="nav-icon fa fa-calendar"></i>
+    <p>
+      Inbox
+      <i class="right fas fa-angle-left"></i>
+    </p>
+  </a>
+  <ul class="nav nav-treeview">
+
+    <li class="nav-item" *ngIf="role == 'Physician'">
+      <a href="javascript:void(0)" (click)="menu_click(7)"  class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Upcoming Appointment</p>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a  class="nav-link">
+        <i class="nav-icon fa fa-envelope"></i>
+        <p>
+          Notes
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="javascript:void(0)" (click)="menu_click(1)"  class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Send Notes</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)" (click)="menu_click(2)"  class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Received Notes</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)" (click)="menu_click(3)"  class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Sent Notes</p>
+          </a>
+        </li>
+      </ul>
+    </li>                         
+  </ul>
+</li>
+        <li class="nav-item" *ngIf="role == 'Physician' || role == 'Nurse'">
+          <a routerLink="/patientlist" class="nav-link">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <p>
+              Patient Registration
+            </p>
+          </a>
+        </li>
+<!--         
+        <li class="nav-item" *ngIf="role == 'Physician' || role == 'Nurse'">
+          <a routerLink="#" class="nav-link">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <p>
+              Patient Detail
+            </p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="role == 'Physician' || role == 'Nurse'">
+          <a routerLink="/patient-visit" class="nav-link">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <p>
+              Patient Visit Detail
+            </p>
+          </a>
+        </li>
+
+
+
+        <li class="nav-item" *ngIf="role == 'Physician' || role == 'Nurse'">
+          <a routerLink="#" class="nav-link">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <p>
+              Profile Management
+            </p>
+          </a>
+        </li> -->
+
+        <li class="nav-item">
+          <a  class="nav-link">
+            <i class="nav-icon fa fa-clock-o"></i>
+            <p>
+              Patient Visit
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+
+            <li class="nav-item" *ngIf="role == 'Physician'">
+              <a routerLink="/patient-visit" class="nav-link">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> 
+                <p>
+                  Patient Visit Detail 
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a routerLink="/patientvisithistory" class="nav-link">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
+                <p>
+                  Patient Visit History     
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li> 
+
+
+        <!--***************************** If Role Is Patient *********************************** -->
+        
+        <li class="nav-item" *ngIf="role == 'Patient'">
+          <a routerLink="/patientdetails" class="nav-link">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <p>
+              Patient Detail
+            </p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="role == 'Patient'">
+          <a routerLink="/visit-detail" class="nav-link">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <p>
+              Patient Visit History
+            </p>
+          </a>
+        </li>
+
+        <!--*********************************************************************************** -->
+
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fa fa-calendar"></i>
+            <p>
+              Schedule
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="javascript:void(0)" (click)="menu_click(5)" class="nav-link">
+                <i class="far fa-calendar-check-o nav-icon"></i>
+                <p>View Calendar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" (click)="menu_click(6)" class="nav-link">
+                <i class="far fa-calendar-plus-o nav-icon"></i>
+                <p>Schedule Appointment</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" (click)="menu_click(4)" class="nav-link">
+                <i class="far fa-calendar-times-o nav-icon"></i>
+                <p>Appointment List</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" (click)="logout_click()" class="nav-link">
+            <i class="nav-icon fa fa-sign-out"></i>
+            <p>
+              Sign out
+            </p>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</aside>
